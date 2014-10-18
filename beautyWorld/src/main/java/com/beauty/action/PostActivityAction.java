@@ -86,10 +86,6 @@ public class PostActivityAction extends DispatchAction {
 				if (!fileToCreate.exists()) {
 					FileOutputStream fileOutStream = new FileOutputStream(
 							fileToCreate);
-					
-					FileInputStream fileInputStream = new FileInputStream(fileName);
-					
-					fileInputStream.read(b)
 					fileOutStream.write(imageFile.getFileData());
 					fileOutStream.flush();
 					fileOutStream.close();

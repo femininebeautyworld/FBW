@@ -24,7 +24,7 @@ public class PictureContentBean {
 	}
 
 	public void setPostPicture(FormFile postPicture) {
-		this.postPicture = postPicture.;
+		this.postPicture = postPicture;
 	}
 
 	public String getPostPictureDescription() {

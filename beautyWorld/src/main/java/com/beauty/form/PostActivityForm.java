@@ -270,13 +270,6 @@ public class PostActivityForm extends ActionForm {
 		this.postType = post.getPostType();
 		this.postViewType = post.getPostViewType();
 		this.postDescription = post.getPostDescription();
-		for( PostPictureContent postPictureContent : picContents )
-		{
-			PictureContentBean pictureContentBean = new PictureContentBean();
-			pictureContentBean.set
-		}
-		this.pictureContents = pictureContents;
-		this.videoContents = vidContents;
 	}
 
 	public int getPictureContentsListSize() {
