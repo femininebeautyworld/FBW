@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+    "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+
+	<!-- Service Beans Declaration -->
+	<bean id="registerActivityService"
+		class="main.java.com.beauty.service.impl.RegisterActivityServiceImpl">
+		<property name="registerActivityDAO" ref="registerActivityDAO" />
+	</bean>
+
+	<bean id="postActivityService"
+		class="main.java.com.beauty.service.impl.PostActivityServiceImpl">
+		<property name="postActivityDAO" ref="postActivityDAO" />
+	</bean>
+
+	<bean name="/loginActivity" class="main.java.com.beauty.action.LoginActivityAction"
+		singleton="false">
+		<property name="registerActivityService">
+			<ref bean="registerActivityService" />
+		</property>
+	</bean>
+	<bean name="/registrationActivity" class="main.java.com.beauty.action.RegisterActivityAction"
+		singleton="false">
+		<property name="registerActivityService">
+			<ref bean="registerActivityService" />
+		</property>
+	</bean>
+
+	<bean name="/createPostActivity" class="main.java.com.beauty.action.PostActivityAction"
+		singleton="false">
+		<property name="postActivityService">
+			<ref bean="postActivityService" />
+		</property>
+	</bean>
+	
+	<bean name="/editPostActivity" class="main.java.com.beauty.action.PostActivityAction" 
+		singleton="false">
+		<property name="postActivityService">
+			<ref bean="postActivityService" />
+		</property>
+	</bean>
+
+	<bean name="/viewPosts" class="main.java.com.beauty.action.ViewPostsAction" 
+		singleton="false">
+		<property name="postActivityService">
+			<ref bean="postActivityService" />
+		</property>
+	</bean>
+	
+	<bean name="/viewDetailPost" class="main.java.com.beauty.action.PostDetailViewAction" 
+		singleton="false">
+		<property name="postActivityService">
+			<ref bean="postActivityService" />
+		</property>
+	</bean>
+
+	<!-- DAO Beans Declaration -->
+	<import resource="applicationDAOBeans.xml" />
+
+</beans>

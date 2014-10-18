@@ -1,0 +1,39 @@
+.button {
+	background-color: #0079BC;
+	color: #FFF;
+	width: 90px;
+	height: 25px;
+	border-radius: 40px 40px 40px 40px;
+}
+
+.addbutton {
+	background-color: #0079BC;
+	color: #FFF;
+	width: 120px;
+	height: 25px;
+	border-radius: 40px 40px 40px 40px;
+}
+
+.removebutton {
+	background-color: #0079BC;
+	color: #FFF;
+	width: 120px;
+	height: 25px;
+	border-radius: 40px 40px 40px 40px;
+}
+
+.addVidbutton {
+	background-color: #0079BC;
+	color: #FFF;
+	width: 120px;
+	height: 25px;
+	border-radius: 40px 40px 40px 40px;
+}
+
+.removeVidbutton {
+	background-color: #0079BC;
+	color: #FFF;
+	width: 120px;
+	height: 25px;
+	border-radius: 40px 40px 40px 40px;
+}

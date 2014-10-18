@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:web="http://java.sun.com/xml/ns/javaee" xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	id="WebApp_ID" version="3.0">
+	<display-name>Struts 1.X</display-name>
+	<welcome-file-list>
+		<welcome-file>/jsp/index.jsp</welcome-file>
+	</welcome-file-list>
+	<servlet>
+		<servlet-name>action</servlet-name>
+		<servlet-class>org.apache.struts.action.ActionServlet</servlet-class>
+		<init-param>
+			<param-name>config</param-name>
+			<param-value>
+				/WEB-INF/classes/struts-config.xml
+			</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet>
+		<servlet-name>Captcha</servlet-name>
+		<servlet-class>main.java.com.beauty.servlet.RoseIndiaCaptcha</servlet-class>
+		<init-param>
+			<param-name>height</param-name>
+			<param-value>30</param-value>
+		</init-param>
+		<init-param>
+			<param-name>width</param-name>
+			<param-value>120</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>action</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Captcha</servlet-name>
+		<url-pattern>/Captcha.jpg</url-pattern>
+	</servlet-mapping>
+	
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>Requires authentication</web-resource-name>
+			<url-pattern>/beautyWorld</url-pattern>
+			<http-method>GET</http-method>
+			<http-method>POST</http-method>
+		</web-resource-collection>
+
+		<auth-constraint>
+			<role-name>tomcat</role-name>
+		</auth-constraint>
+
+		<user-data-constraint>
+			<!-- transport-guarantee can be CONFIDENTIAL, INTEGRAL, or NONE -->
+			<transport-guarantee>CONFIDENTIAL</transport-guarantee>
+		</user-data-constraint>
+	</security-constraint>
+
+	<!-- tag library descriptors -->
+	<jsp-config>
+
+		<taglib>
+			<taglib-uri>struts/tiles</taglib-uri>
+			<taglib-location>/WEB-INF/struts-tiles.tld</taglib-location>
+		</taglib>
+
+		<taglib>
+			<taglib-uri>struts/nested</taglib-uri>
+			<taglib-location>/WEB-INF/struts-nested.tld</taglib-location>
+		</taglib>
+
+		<taglib>
+			<taglib-uri>struts/logic</taglib-uri>
+			<taglib-location>/WEB-INF/struts-logic.tld</taglib-location>
+		</taglib>
+
+		<taglib>
+			<taglib-uri>struts/html</taglib-uri>
+			<taglib-location>/WEB-INF/struts-html.tld</taglib-location>
+		</taglib>
+
+		<taglib>
+			<taglib-uri>struts/bean</taglib-uri>
+			<taglib-location>/WEB-INF/struts-bean.tld</taglib-location>
+		</taglib>
+
+		<taglib>
+			<taglib-uri>jcaptcha</taglib-uri>
+			<taglib-location>/WEB-INF/jcaptcha.tld</taglib-location>
+		</taglib>
+
+	</jsp-config>
+
+  <!-- in minutes -->
+	<session-config>
+		<session-timeout>20</session-timeout>
+	</session-config>
+
+</web-app>
