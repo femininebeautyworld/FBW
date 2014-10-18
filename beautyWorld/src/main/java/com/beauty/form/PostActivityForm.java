@@ -261,11 +261,6 @@ public class PostActivityForm extends ActionForm {
 	}
 
 	public void populateDomainObject(Posts post) {
-		List<PictureContentBean> picContentsList = new ArrayList<PictureContentBean>();
-		List<PostPictureContent> picContents = new ArrayList<PostPictureContent>(
-				post.getPostPictureContents());
-		List<PostVideoContent> vidContents = new ArrayList<PostVideoContent>(
-				post.getPostVideoContents());
 		this.postTitle = post.getPostTitle();
 		this.postType = post.getPostType();
 		this.postViewType = post.getPostViewType();
