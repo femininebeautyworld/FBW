@@ -54,6 +54,13 @@
 			<ref bean="postActivityService" />
 		</property>
 	</bean>
+	
+	<bean name="/homePage" class="main.java.com.beauty.action.PostActivityAction" 
+		singleton="false">
+		<property name="postActivityService">
+			<ref bean="postActivityService" />
+		</property>
+	</bean>
 
 	<!-- DAO Beans Declaration -->
 	<import resource="applicationDAOBeans.xml" />

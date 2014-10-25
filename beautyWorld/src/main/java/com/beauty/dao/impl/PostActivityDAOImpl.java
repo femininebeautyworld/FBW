@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import main.java.com.beauty.beans.HomePostsContentBean;
 import main.java.com.beauty.beans.ViewPostsBean;
 import main.java.com.beauty.dao.PostActivityDAO;
 import main.java.com.beauty.domain.Posts;
@@ -76,6 +77,20 @@ public class PostActivityDAOImpl implements PostActivityDAO {
 			}
 		};
 		return (Posts) hibernateTemplate.execute(callback);
+	}
+
+	@Override
+	public List<HomePostsContentBean> getPostsByPostType(final String postType) {
+		HibernateCallback callback = new HibernateCallback() {
+			public Object doInHibernate(Session session)
+					throws HibernateException, SQLException {
+				Query query = session
+						.getNamedQuery("main.java.com.beauty.domain.getPostsByPostType");
+				query.setParameter("postType", postType );
+				return query.list();
+			}
+		};
+		return (List<HomePostsContentBean>) hibernateTemplate.execute(callback);
 	}
 
 }

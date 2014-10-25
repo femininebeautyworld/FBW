@@ -18,6 +18,10 @@
 	</global-forwards>
 
 	<action-mappings>
+	
+	<!-- ===================================== -->
+	<!-- ADMIN SIDE -->
+	<!-- ===================================== -->
 
 		<action path="/login" type="org.apache.struts.actions.ForwardAction"
 			parameter="login.page" />
@@ -75,6 +79,18 @@
 			<forward name="success" path="post.detail.view.page" />
 			<forward name="failure" redirect="true" path="/viewPosts.do" />
 		</action>
+		
+    <!-- ===================================== -->
+	<!-- PARTICIPANT SIDE -->
+	<!-- ===================================== -->
+	
+		<action path="/homePage"
+	        parameter="method"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			scope="request">
+			<forward name="success" path="pax.home.page" />
+		</action>	
+
 
 	</action-mappings>
 

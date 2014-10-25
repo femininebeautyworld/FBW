@@ -347,10 +347,14 @@ function hideTextAreaDiv() {
 								<html:option value="" disabled="true">none</html:option>
 								<html:option value="fashion">Fashion</html:option>
 								<html:option value="beauty">Beauty</html:option>
-								<html:option value="celebFashion">Celebrity Fashion</html:option>
 								<html:option value="health">Health</html:option>
-								<html:option value="wedding">Wedding Collections</html:option>
-								<html:option value="others">Collections and Others</html:option>
+								<html:option value="hair">Hair Styles</html:option>
+								<html:option value="diy">Diys</html:option>
+								<html:option value="celebrity">Celebrity Fashion</html:option>
+								<html:option value="jewelry">Jewelry</html:option>
+								<html:option value="bags">Hand Bags</html:option>
+								<html:option value="shoes">Shoes</html:option>
+								<html:option value="others">Others</html:option>
 							</html:select></td>
 					</tr>
 					<tr>

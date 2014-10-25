@@ -4,13 +4,13 @@
 package main.java.com.beauty.action;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import main.java.com.beauty.beans.HomePostsContentBean;
 import main.java.com.beauty.beans.PictureContentBean;
 import main.java.com.beauty.domain.Posts;
 import main.java.com.beauty.form.PostActivityForm;
@@ -175,6 +175,19 @@ public class PostActivityAction extends DispatchAction {
 		}
 
 		return forward;
+	}
+	
+	public ActionForward fetchResultsByPostType(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+
+		String postType = request.getParameter("postType");
+		
+		List<HomePostsContentBean> posts = postActivityService.getPostsByPostType( postType );
+
+		request.setAttribute("posts", posts);
+		
+		return mapping.findForward(SUCCESS);
 	}
 
 }
