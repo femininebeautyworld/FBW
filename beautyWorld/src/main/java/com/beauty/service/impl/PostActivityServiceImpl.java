@@ -5,7 +5,6 @@ package main.java.com.beauty.service.impl;
 
 import java.util.List;
 
-import main.java.com.beauty.beans.HomePostsContentBean;
 import main.java.com.beauty.dao.PostActivityDAO;
 import main.java.com.beauty.domain.Posts;
 import main.java.com.beauty.service.PostActivityService;
@@ -42,7 +41,7 @@ public class PostActivityServiceImpl implements PostActivityService {
 	}
 
 	@Override
-	public List<HomePostsContentBean> getPostsByPostType(String postType) {
+	public List<Object[]> getPostsByPostType(String postType) {
 		return postActivityDAO.getPostsByPostType( postType );
 	}
 

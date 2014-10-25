@@ -5,7 +5,6 @@ package main.java.com.beauty.dao;
 
 import java.util.List;
 
-import main.java.com.beauty.beans.HomePostsContentBean;
 import main.java.com.beauty.domain.Posts;
 
 /**
@@ -20,6 +19,6 @@ public interface PostActivityDAO {
 
 	Posts getPostById(Long postId);
 
-	List<HomePostsContentBean> getPostsByPostType(String postType);
+	List<Object[]> getPostsByPostType(String postType);
 
 }

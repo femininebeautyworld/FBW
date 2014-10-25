@@ -80,17 +80,17 @@ public class PostActivityDAOImpl implements PostActivityDAO {
 	}
 
 	@Override
-	public List<HomePostsContentBean> getPostsByPostType(final String postType) {
+	public List<Object[]> getPostsByPostType(final String postType) {
 		HibernateCallback callback = new HibernateCallback() {
 			public Object doInHibernate(Session session)
 					throws HibernateException, SQLException {
 				Query query = session
 						.getNamedQuery("main.java.com.beauty.domain.getPostsByPostType");
-				query.setParameter("postType", postType );
+				query.setParameter("postType", postType, org.hibernate.Hibernate.STRING);
 				return query.list();
 			}
 		};
-		return (List<HomePostsContentBean>) hibernateTemplate.execute(callback);
+		return  (List<Object[]>) hibernateTemplate.execute(callback);
 	}
 
 }

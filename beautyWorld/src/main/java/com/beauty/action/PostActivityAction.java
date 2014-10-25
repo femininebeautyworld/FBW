@@ -5,7 +5,10 @@ package main.java.com.beauty.action;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -44,7 +47,8 @@ public class PostActivityAction extends DispatchAction {
 		PostActivityForm postActivityForm = new PostActivityForm();
 
 		request.setAttribute("postActivityForm", postActivityForm);
-		request.getSession().setAttribute("pictureContentsListSize", postActivityForm.getPictureContentsListSize() );
+		request.getSession().setAttribute("pictureContentsListSize",
+				postActivityForm.getPictureContentsListSize());
 
 		return mapping.findForward(SUCCESS_DISPLAY);
 	}
@@ -61,11 +65,11 @@ public class PostActivityAction extends DispatchAction {
 				.getPictureContents();
 
 		// Get the servers upload directory real path name
-		String imageFilePath = request.getServletContext()
-				.getRealPath("img");
+		String imageFilePath = request.getServletContext().getRealPath("img");
 
 		for (PictureContentBean pictureContentBean : pictureContentList) {
-			String imageDirPath = "img" + "/" + pictureContentBean.getPostPicture().getFileName();
+			String imageDirPath = "img" + "/"
+					+ pictureContentBean.getPostPicture().getFileName();
 			pictureContentBean.setImageDirPath(imageDirPath);
 
 			// Process the FormFile
@@ -131,8 +135,9 @@ public class PostActivityAction extends DispatchAction {
 
 		postActivityForm.addEmptyPictureContents();
 
-		request.getSession().setAttribute("pictureContentsListSize", postActivityForm.getPictureContentsListSize() );
-		
+		request.getSession().setAttribute("pictureContentsListSize",
+				postActivityForm.getPictureContentsListSize());
+
 		if (!errors.isEmpty()) {
 			saveErrors(request, errors);
 			forward = mapping.findForward(FAILURE);
@@ -176,17 +181,90 @@ public class PostActivityAction extends DispatchAction {
 
 		return forward;
 	}
-	
-	public ActionForward fetchResultsByPostType(ActionMapping mapping, ActionForm form,
-			HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+
+	public ActionForward fetchResultsByPostType(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
 
 		String postType = request.getParameter("postType");
-		
-		List<HomePostsContentBean> posts = postActivityService.getPostsByPostType( postType );
+		int min = 1;
+		int max = 6;
+		int maxLength = 150;
 
-		request.setAttribute("posts", posts);
-		
+		List<Object[]> posts = postActivityService.getPostsByPostType(postType);
+
+		List<HomePostsContentBean> assignedPosts = new ArrayList<HomePostsContentBean>();
+
+		for (Object[] obj : posts) {
+
+			HomePostsContentBean homePostsContentBean = new HomePostsContentBean();
+			BigDecimal bg1 = (BigDecimal) obj[0];
+			homePostsContentBean.setPostId(bg1.longValue());
+			homePostsContentBean.setPostTitle((String) obj[1]);
+			homePostsContentBean.setPostType((String) obj[2]);
+			if (obj[3] != null) {
+				if (obj[3].toString().length() > maxLength) {
+					homePostsContentBean.setPostDescription(((String) obj[3])
+							.replaceAll("\\<.*?>", "").substring(0, maxLength));
+				} else {
+					homePostsContentBean.setPostDescription(((String) obj[3])
+							.replaceAll("\\<.*?>", ""));
+				}
+			}
+			homePostsContentBean.setPostPictureUrl((String) obj[4]);
+			homePostsContentBean.setPostVidUrl((String) obj[5]);
+			if (obj[6] != null) {
+				if (obj[6].toString().length() > maxLength) {
+					homePostsContentBean.setPostVideoDesc(((String) obj[6])
+							.replaceAll("\\<.*?>", "").substring(0, maxLength));
+				} else {
+					homePostsContentBean.setPostVideoDesc(((String) obj[6])
+							.replaceAll("\\<.*?>", ""));
+				}
+			}
+
+			if (homePostsContentBean.getPostPictureUrl() != null) {
+				Random rand = new Random();
+				int option = rand.nextInt((max - min) + 1) + min;
+
+				switch (option) {
+				case 1:
+					homePostsContentBean.setImageWidth(1024);
+					homePostsContentBean.setImageHeight(1024);
+					break;
+
+				case 2:
+					homePostsContentBean.setImageWidth(900);
+					homePostsContentBean.setImageHeight(600);
+					break;
+
+				case 3:
+					homePostsContentBean.setImageWidth(683);
+					homePostsContentBean.setImageHeight(1024);
+					break;
+
+				case 4:
+					homePostsContentBean.setImageWidth(683);
+					homePostsContentBean.setImageHeight(957);
+					break;
+
+				case 5:
+					homePostsContentBean.setImageWidth(1024);
+					homePostsContentBean.setImageHeight(662);
+					break;
+
+				case 6:
+					homePostsContentBean.setImageWidth(798);
+					homePostsContentBean.setImageHeight(1024);
+					break;
+				}
+			}
+
+			assignedPosts.add(homePostsContentBean);
+
+		}
+		request.setAttribute("posts", assignedPosts);
+
 		return mapping.findForward(SUCCESS);
 	}
 

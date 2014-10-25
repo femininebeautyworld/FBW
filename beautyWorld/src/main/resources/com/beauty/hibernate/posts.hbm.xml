@@ -42,10 +42,15 @@
 		<return alias="post" class="main.java.com.beauty.domain.Posts" />
         <![CDATA[select * from fbm_posts post]]>
 	</sql-query>
+
+	<sql-query name="main.java.com.beauty.domain.getPostById">
+		<return alias="post" class="main.java.com.beauty.domain.Posts" />
+        <![CDATA[select * from fbm_posts post where post_id = :postId]]>
+	</sql-query>
 	
-	<sql-query name="main.java.com.beauty.domain.getPostsByPostType">
-		<return alias="p" class="main.java.com.beauty.beans.HomePostsContentBean" />
-        <![CDATA[
+		<sql-query name="main.java.com.beauty.domain.getPostsByPostType">
+        <![CDATA[ 
+        select result.* from (
         SELECT p.POST_ID       AS postId,
   p.POST_TITLE         AS postTitle,
   p.POST_TYPE          AS postType,
@@ -70,15 +75,12 @@ FROM fbm_posts p,
     )
   WHERE RANK = 1
   ) vpvc
-WHERE p.post_id = vpc.post_id
-AND p.post_id   = vpvc.post_id
-AND p.post_type in nvl(:postType, p.post_type)
-]]>
-	</sql-query>
-
-	<sql-query name="main.java.com.beauty.domain.getPostById">
-		<return alias="post" class="main.java.com.beauty.domain.Posts" />
-        <![CDATA[select * from fbm_posts post where post_id = :postId]]>
+WHERE p.post_id  = vpc.post_id
+AND p.post_id    = vpvc.post_id
+AND p.post_type IN NVL(:postType, p.post_type)
+)result
+        
+        ]]>
 	</sql-query>
 
 </hibernate-mapping>
