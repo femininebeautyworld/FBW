@@ -77,6 +77,7 @@
 			type="org.springframework.web.struts.DelegatingActionProxy"
 			scope="request">
 			<forward name="success" path="post.detail.view.page" />
+			<forward name="success_post" path="post.view.page" />
 			<forward name="failure" redirect="true" path="/viewPosts.do" />
 		</action>
 		
@@ -89,6 +90,14 @@
 			type="org.springframework.web.struts.DelegatingActionProxy"
 			scope="request">
 			<forward name="success" path="pax.home.page" />
+		</action>
+		
+		<action path="/viewPaxDetailPost"
+		    parameter="method"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			scope="request">
+			<forward name="success_post" path="pax.post.view.page" />
+			<forward name="failure" redirect="true" path="/homePage.do" />
 		</action>	
 
 

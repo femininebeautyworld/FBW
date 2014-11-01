@@ -52,5 +52,9 @@
 	<definition name="pax.home.page" extends="mainPageLayout">
 		<put name="body" value="/jsp/paxJsp/index.jsp" />
 	</definition>
+	
+	<definition name="pax.post.view.page" extends="mainPageLayout">
+		<put name="body" value="/jsp/paxJsp/single.jsp" />
+	</definition>
 
 </tiles-definitions>

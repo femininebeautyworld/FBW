@@ -17,13 +17,13 @@
 			<div style="margin-bottom: 30px; opacity: 1;">
 				<c:choose>
 					<c:when test="${post.postPictureUrl ne null}">
-						<span class="stalac_box_img"> <a href="<%=RequestUtils.getBaseURI(request)%>/viewDetailPost.do?method=displayPost&postId=${post.postId}"><img width="${post.imageWidth}"
+						<span class="stalac_box_img"> <a href="<%=RequestUtils.getBaseURI(request)%>/viewPaxDetailPost.do?method=displayPost&postId=${post.postId}"><img width="${post.imageWidth}"
 								height="${post.imageHeight}" alt="img2" class="attachment-large wp-post-image" src="${post.postPictureUrl}"
 								style="width: 100%; height: auto; display: block; margin-left: auto; margin-right: auto;"></a>
 						</span>
 						<!-- //stalac_box_img -->
 						<h3>
-							<a href="<%=RequestUtils.getBaseURI(request)%>/viewDetailPost.do?method=displayPost&postId=${post.postId}">${post.postTitle}</a>
+							<a href="<%=RequestUtils.getBaseURI(request)%>/viewPaxDetailPost.do?method=displayPost&postId=${post.postId}">${post.postTitle}</a>
 						</h3>
 						<p class="item stalac_box">${post.postDescription}....</p>
 					</c:when>
@@ -34,7 +34,7 @@
 						</span>
 						<!-- //stalac_box_img -->
 						<h3>
-							<a href="<%=RequestUtils.getBaseURI(request)%>/viewDetailPost.do?method=displayPost&postId=${post.postId}">${post.postTitle}</a>
+							<a href="<%=RequestUtils.getBaseURI(request)%>/viewPaxDetailPost.do?method=displayPost&postId=${post.postId}">${post.postTitle}</a>
 						</h3>
 						<p class="item stalac_box">${post.postVideoDesc}....</p>
 					</c:otherwise>

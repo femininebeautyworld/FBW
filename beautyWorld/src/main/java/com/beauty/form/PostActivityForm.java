@@ -42,8 +42,8 @@ public class PostActivityForm extends ActionForm {
 	private String method;
 	private List<PictureContentBean> pictureContents;
 	private List<PostVideoContent> videoContents;
-	private int pictureContentsListSize = 1;
-	private int pictureContentsListCount = 1;
+	private int pictureContentsListSize = 0;
+	private int pictureContentsListCount = 0;
 
 	public String getPostTitle() {
 		return postTitle;
@@ -78,20 +78,20 @@ public class PostActivityForm extends ActionForm {
 	}
 
 	public List<PictureContentBean> getPictureContents() {
-		if (pictureContents == null) {
+		/*if (pictureContents == null) {
 			pictureContents = new ArrayList<PictureContentBean>();
 			PictureContentBean pictureContentBean = new PictureContentBean();
 			this.pictureContents.add(pictureContentBean);
-		}
+		}*/
 		return pictureContents;
 	}
 
 	public List<PostVideoContent> getVideoContents() {
-		if (videoContents == null) {
+		/*if (videoContents == null) {
 			this.videoContents = new ArrayList<PostVideoContent>();
 			PostVideoContent postVideoContent = new PostVideoContent();
 			this.videoContents.add(postVideoContent);
-		}
+		}*/
 		return videoContents;
 	}
 
@@ -135,11 +135,11 @@ public class PostActivityForm extends ActionForm {
 			int pictureContentsCount) {
 		List<PictureContentBean> postPictureContentList = new ArrayList<PictureContentBean>();
 
-		// add a default empty row
-		if (pictureContentsCount == 0) {
+		/*// add a default empty row
+		if (pictureContentsCount == 1) {
 			PictureContentBean postPictureContent = new PictureContentBean();
 			postPictureContentList.add(postPictureContent);
-		}
+		}*/
 
 		for (int index1 = 0; index1 < pictureContentsCount; index1++) {
 			PictureContentBean postPictureContent = new PictureContentBean();
@@ -151,7 +151,7 @@ public class PostActivityForm extends ActionForm {
 	public List<PostVideoContent> getVideoContents(int index) {
 		List<PostVideoContent> videoContentsList = new ArrayList<PostVideoContent>();
 
-		if (index == 0) {
+		if (index == 1) {
 			PostVideoContent postVideoContent = new PostVideoContent();
 			videoContentsList.add(postVideoContent);
 		}
@@ -218,13 +218,15 @@ public class PostActivityForm extends ActionForm {
 
 	private Set<PostVideoContent> toVideoContentDomainObject(Posts post) {
 		Set<PostVideoContent> videoContentsSet = new HashSet<PostVideoContent>();
-		for (PostVideoContent vidContent : this.videoContents) {
-			PostVideoContent postVideoContent = new PostVideoContent();
-			postVideoContent.setPostVideoUrl(vidContent.getPostVideoUrl());
-			postVideoContent.setPostVideoDescription(vidContent
-					.getPostVideoDescription());
-			postVideoContent.setPosts(post);
-			videoContentsSet.add(postVideoContent);
+		if (this.videoContents != null) {
+			for (PostVideoContent vidContent : this.videoContents) {
+				PostVideoContent postVideoContent = new PostVideoContent();
+				postVideoContent.setPostVideoUrl(vidContent.getPostVideoUrl());
+				postVideoContent.setPostVideoDescription(vidContent
+						.getPostVideoDescription());
+				postVideoContent.setPosts(post);
+				videoContentsSet.add(postVideoContent);
+			}
 		}
 		return videoContentsSet;
 	}

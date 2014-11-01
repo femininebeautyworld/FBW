@@ -68,31 +68,33 @@ public class PostActivityAction extends DispatchAction {
 		String imageFilePath = request.getServletContext().getRealPath("img");
 
 		for (PictureContentBean pictureContentBean : pictureContentList) {
-			String imageDirPath = "img" + "/"
-					+ pictureContentBean.getPostPicture().getFileName();
-			pictureContentBean.setImageDirPath(imageDirPath);
+			if (pictureContentBean.getPostPicture().getFileName() != null) {
+				String imageDirPath = "img" + "/"
+						+ pictureContentBean.getPostPicture().getFileName();
+				pictureContentBean.setImageDirPath(imageDirPath);
 
-			// Process the FormFile
-			FormFile imageFile = pictureContentBean.getPostPicture();
+				// Process the FormFile
+				FormFile imageFile = pictureContentBean.getPostPicture();
 
-			String contentType = imageFile.getContentType();
+				String contentType = imageFile.getContentType();
 
-			// Get the file name
-			String fileName = imageFile.getFileName();
+				// Get the file name
+				String fileName = imageFile.getFileName();
 
-			if (!fileName.equals("")) {
-				System.out.println("Server path:" + imageFilePath);
+				if (!fileName.equals("")) {
+					System.out.println("Server path:" + imageFilePath);
 
-				// Create file
-				File fileToCreate = new File(imageFilePath, fileName);
+					// Create file
+					File fileToCreate = new File(imageFilePath, fileName);
 
-				// If file does not exists create file
-				if (!fileToCreate.exists()) {
-					FileOutputStream fileOutStream = new FileOutputStream(
-							fileToCreate);
-					fileOutStream.write(imageFile.getFileData());
-					fileOutStream.flush();
-					fileOutStream.close();
+					// If file does not exists create file
+					if (!fileToCreate.exists()) {
+						FileOutputStream fileOutStream = new FileOutputStream(
+								fileToCreate);
+						fileOutStream.write(imageFile.getFileData());
+						fileOutStream.flush();
+						fileOutStream.close();
+					}
 				}
 			}
 		}

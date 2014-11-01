@@ -61,6 +61,13 @@
 			<ref bean="postActivityService" />
 		</property>
 	</bean>
+	
+	<bean name="/viewPaxDetailPost" class="main.java.com.beauty.action.PaxPostDetailViewAction" 
+		singleton="false">
+		<property name="postActivityService">
+			<ref bean="postActivityService" />
+		</property>
+	</bean>
 
 	<!-- DAO Beans Declaration -->
 	<import resource="applicationDAOBeans.xml" />
