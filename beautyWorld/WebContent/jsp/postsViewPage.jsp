@@ -14,6 +14,8 @@
 <br>
 <br>
 <div align="center">
+<c:choose>
+<c:when test="${fn:length(viewPostsList) gt 0}">
 		<display:table class="CSSTableGenerator" name="viewPostsList" pagesize="5" export="false" sort="list" keepStatus ="true" uid="postBean" requestURI="/viewPosts.do">
 			<display:column title="Post Image" sortable="false">
 				<img alt="View Image" src="http://www.infoniac.com/uimg/smile-small.jpg" />
@@ -27,7 +29,7 @@
 			  Posts temp = (Posts)pageContext.getAttribute( "postBean" );
 			  pageContext.setAttribute( "viewUrl", RequestUtils.getBaseURI(request)+"/viewDetailPost.do?method=displayPost&postId="+ temp.getPostId() +"");
 			%>
-				<a href="<c:out value="${viewUrl}"/>"><img alt="View Image" src="/beautyWorld/img/viewPost.png" /></a>
+			<a href="<c:out value="${viewUrl}"/>"><img alt="View Image" src="/beautyWorld/img/viewPost.png" /></a>
 			</display:column>
 			<display:column title="Edit Post" sortable="false" headerClass="sortable">
 			<%
@@ -36,7 +38,12 @@
 			%>
 			<a href="<c:out value="${editUrl}"/>"><img alt="View Image" src="/beautyWorld/img/editPost.png" /></a>
 			</display:column>
-		</display:table>
+		</display:table>		
+</c:when>
+<c:otherwise>
+<p> No posts to view </p>
+</c:otherwise>
+</c:choose>
 </div>
 </body>
 </html>

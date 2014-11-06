@@ -8,7 +8,7 @@
 			<!-- <div class="container"> -->
 
 			<div>
-				<a href="<%=RequestUtils.getBaseURI(request)%>/homePage.do?method=fetchResultsByPostType"><img alt="logo" class="logo" src="<%=RequestUtils.getBaseURI(request)%>/img/paxImg/logo_pic.jpg"></a><br>
+				<a href="<%=RequestUtils.getBaseURI(request)%>/homePage.do?method=fetchResultsByPostType"><img alt="logo" class="logo" src="/beautyWorld/img/paxImg/logo_pic.jpg"></a><br>
 				<font size="3" face="Zapf Chancery, cursive;"><a href="<%=RequestUtils.getBaseURI(request)%>/homePage.do?method=fetchResultsByPostType">Feminine Beauty World</a></font>
 			</div>
 			<!--//logo_cont-->
@@ -21,11 +21,11 @@
 			<div class="header_container">
 				<div class="header_social">
 				   Follow us on:<br>
-					<a target="_blank" href="https://www.facebook.com/FeminineBeautyWorld"> <img width="25" height="25" alt="facebook" src="<%=RequestUtils.getBaseURI(request)%>/img/paxImg/facebook-icon@2x.png">
-					</a> <a target="_blank" href="http://www.pinterest.com/vcfbw/"> <img width="25" height="25" alt="pinterest" src="<%=RequestUtils.getBaseURI(request)%>/img/paxImg/pinterest-icon@2x.png">
-					</a> <a target="_blank" href="http://instagram.com/femininebeautyworld"> <img width="25" height="25" alt="picasa" src="<%=RequestUtils.getBaseURI(request)%>/img/paxImg/picasa-icon@2x.png">
+					<a target="_blank" href="https://www.facebook.com/FeminineBeautyWorld"> <img width="25" height="25" alt="facebook" src="/beautyWorld/img/paxImg/facebook-icon@2x.png">
+					</a> <a target="_blank" href="http://www.pinterest.com/vcfbw/"> <img width="25" height="25" alt="pinterest" src="/beautyWorld/img/paxImg/pinterest-icon@2x.png">
+					</a> <a target="_blank" href="http://instagram.com/femininebeautyworld"> <img width="25" height="25" alt="picasa" src="/beautyWorld/img/paxImg/picasa-icon@2x.png">
 					</a> <a target="_blank" href="https://plus.google.com/106495188444653564735/posts"> <img width="25" height="25" alt="google plus"
-						src="<%=RequestUtils.getBaseURI(request)%>/img/paxImg/google-plus-icon@2x.png">
+						src="/beautyWorld/img/paxImg/google-plus-icon@2x.png">
 					</a>
 				</div>
 				<div class="clear"></div>
@@ -50,7 +50,7 @@
 					<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-17" id="menu-item-17"><a
 						href="<%=RequestUtils.getBaseURI(request)%>/homePage.do?method=fetchResultsByPostType&postType=celebrity">Celebrity Fashion</a></li>
 					<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-132" id="menu-item-132"><a href="#">Accessories</a>
-						<ul class="sub-menu">
+						<ul class="sub-menu" style="display: block;">
 							<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-18" id="menu-item-18"><a
 								href="<%=RequestUtils.getBaseURI(request)%>/homePage.do?method=fetchResultsByPostType&postType=jewelry">Jewelry</a></li>
 							<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-19" id="menu-item-19"><a

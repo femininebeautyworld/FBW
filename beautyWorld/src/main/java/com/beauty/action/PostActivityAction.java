@@ -25,6 +25,7 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessages;
 import org.apache.struts.actions.DispatchAction;
 import org.apache.struts.upload.FormFile;
+import org.codehaus.jackson.map.ObjectMapper;
 
 /**
  * @author vinay
@@ -49,6 +50,9 @@ public class PostActivityAction extends DispatchAction {
 		request.setAttribute("postActivityForm", postActivityForm);
 		request.getSession().setAttribute("pictureContentsListSize",
 				postActivityForm.getPictureContentsListSize());
+
+		request.getSession().setAttribute("videoContentsListSize",
+				postActivityForm.getVideoContentsListSize());
 
 		return mapping.findForward(SUCCESS_DISPLAY);
 	}
@@ -148,6 +152,27 @@ public class PostActivityAction extends DispatchAction {
 		return forward;
 	}
 
+	public ActionForward addAnotherVideoFields(ActionMapping mapping,
+			ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) {
+		ActionForward forward = mapping.findForward(SUCCESS_DISPLAY);
+		ActionMessages errors = new ActionMessages();
+		PostActivityForm postActivityForm = (PostActivityForm) request
+				.getAttribute("postActivityForm");
+
+		postActivityForm.addEmptyVideoContents();
+
+		request.getSession().setAttribute("videoContentsListSize",
+				postActivityForm.getVideoContentsListSize());
+
+		if (!errors.isEmpty()) {
+			saveErrors(request, errors);
+			forward = mapping.findForward(FAILURE);
+		}
+
+		return forward;
+	}
+
 	public ActionForward removePictureField(ActionMapping mapping,
 			ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) {
@@ -189,6 +214,7 @@ public class PostActivityAction extends DispatchAction {
 			HttpServletResponse response) throws Exception {
 
 		String postType = request.getParameter("postType");
+		String callType = request.getParameter("callType");
 		int min = 1;
 		int max = 6;
 		int maxLength = 150;
@@ -265,6 +291,14 @@ public class PostActivityAction extends DispatchAction {
 			assignedPosts.add(homePostsContentBean);
 
 		}
+		if (callType != null) {
+			ObjectMapper mapper = new ObjectMapper();
+			String errorsJson = mapper.writeValueAsString(assignedPosts);
+			response.setContentType("application/json");
+			response.getOutputStream().print(errorsJson);
+			return null;
+		}
+
 		request.setAttribute("posts", assignedPosts);
 
 		return mapping.findForward(SUCCESS);

@@ -10,12 +10,9 @@
 <title>Feminine Beauty World</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 <link media="all" type="text/css" href="<%=RequestUtils.getBaseURI(request)%>/jsp/paxJsp/style.css" id="cyclone-template-style-dark-css" rel="stylesheet">
-<link media="all" type="text/css" href="<%=RequestUtils.getBaseURI(request)%>/jsp/paxJsp/style.css" id="cyclone-template-style-default-css"
-	rel="stylesheet">
-<link media="all" type="text/css" href="<%=RequestUtils.getBaseURI(request)%>/jsp/paxJsp/style.css" id="cyclone-template-style-standard-css"
-	rel="stylesheet">
-<link media="all" type="text/css" href="<%=RequestUtils.getBaseURI(request)%>/jsp/paxJsp/style.css" id="cyclone-template-style-thumbnails-css"
-	rel="stylesheet">
+<link media="all" type="text/css" href="<%=RequestUtils.getBaseURI(request)%>/jsp/paxJsp/style.css" id="cyclone-template-style-default-css" rel="stylesheet">
+<link media="all" type="text/css" href="<%=RequestUtils.getBaseURI(request)%>/jsp/paxJsp/style.css" id="cyclone-template-style-standard-css" rel="stylesheet">
+<link media="all" type="text/css" href="<%=RequestUtils.getBaseURI(request)%>/jsp/paxJsp/style.css" id="cyclone-template-style-thumbnails-css" rel="stylesheet">
 <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
 <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,200">
 <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans">
@@ -37,6 +34,10 @@
 <script type="text/javascript" src="<%=RequestUtils.getBaseURI(request)%>/js/paxJs/jquery.carouFredSel-6.2.1.js"></script>
 <script type="text/javascript" src="<%=RequestUtils.getBaseURI(request)%>/js/paxJs/scripts.js"></script>
 
+<!--css and js for multiple image display-->
+
+
+
 <style type="text/css">
 body {
 	
@@ -44,11 +45,11 @@ body {
 </style>
 </head>
 <body class="home blog">
-	
+
 	<tiles:insert attribute="header" />
-	
+
 	<tiles:insert attribute="body" />
-	
+
 	<tiles:insert attribute="footer" />
 
 </body>

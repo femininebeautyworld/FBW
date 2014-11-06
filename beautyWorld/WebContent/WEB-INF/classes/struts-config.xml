@@ -98,8 +98,7 @@
 			scope="request">
 			<forward name="success_post" path="pax.post.view.page" />
 			<forward name="failure" redirect="true" path="/homePage.do" />
-		</action>	
-
+		</action>
 
 	</action-mappings>
 
