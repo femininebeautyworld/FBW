@@ -1,0 +1,56 @@
+#vscf label {
+    color: #333;
+    display: block;
+    font-size: 1em;
+    font-weight: normal;
+    margin: 10px 0;
+}
+#vscf_name, #vscf_email, #vscf_subject {
+    border: 1px solid #ccc;
+    color: #333;
+    display: block;
+    font-size: 1em;
+    margin: 10px 0;
+    padding: 5px;
+    width: 70%;
+}
+#vscf_message {
+    border: 1px solid #ccc;
+    color: #333;
+    display: block;
+    font-size: 1em;
+    margin: 10px 0;
+    padding: 5px;
+    width: 90%;
+}
+#vscf_send {
+    background: none repeat scroll 0 0 #f8f8f8;
+    border: 1px solid #ccc;
+    color: #333;
+    font-size: 1em;
+    font-weight: normal;
+    margin: 5px 0;
+    padding: 5px 10px;
+    width: 8em;
+}
+#vscf_send:hover {
+    background: none repeat scroll 0 0 #f2f2f2;
+}
+#vscf input.error {
+    border-color: #e77776;
+}
+#vscf textarea.error {
+    border-color: #e77776;
+}
+span.error {
+    color: #e77776;
+}
+span.hide {
+    display: none;
+}
+.info {
+    clear: both;
+    color: #333;
+    font-size: 1.25em;
+    font-style: italic;
+}

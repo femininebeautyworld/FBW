@@ -14,13 +14,21 @@
 		<put name="body" value="" />
 		<put name="footer" value="/jsp/footer.jsp" />
 	</definition>
+	
+	<definition name="loginBaseLayout" path="/jsp/loginBaseLayout.jsp">
+		<put name="header" value="/jsp/header.jsp" />
+		<put name="body" value="" />
+		<put name="footer" value="/jsp/footer.jsp" />
+	</definition>
 
 	<definition name="register.page" extends="baseLayout">
 		<put name="body" value="/jsp/register.jsp" />
 	</definition>
 
-	<definition name="login.page" extends="baseLayout">
-		<put name="body" value="/jsp/login.jsp" />
+	<definition name="login.page" extends="loginBaseLayout">
+	<put name="header" value="/jsp/header.jsp" />
+	<put name="body" value="/jsp/login.jsp" />
+	<put name="footer" value="/jsp/footer.jsp" />
 	</definition>
 
 	<definition name="user.home.page" extends="baseLayout">
@@ -55,6 +63,14 @@
 	
 	<definition name="pax.post.view.page" extends="mainPageLayout">
 		<put name="body" value="/jsp/paxJsp/single.jsp" />
+	</definition>
+	
+	<definition name="pax.horizon.post.view.page" extends="mainPageLayout">
+		<put name="body" value="/jsp/paxJsp/alternateView.jsp" />
+	</definition>
+	
+	<definition name="pax.contact.page" extends="mainPageLayout">
+		<put name="body" value="/jsp/paxJsp/contact.jsp" />
 	</definition>
 
 </tiles-definitions>

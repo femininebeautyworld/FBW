@@ -21,6 +21,7 @@ public class User {
 	private String state;
 	private String country;
 	private Long zipcode;
+	private String role;
 
 	public Long getId() {
 		return id;
@@ -108,6 +109,14 @@ public class User {
 
 	public void setZipcode(Long zipcode) {
 		this.zipcode = zipcode;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 }

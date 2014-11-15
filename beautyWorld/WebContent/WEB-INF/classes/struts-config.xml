@@ -11,6 +11,8 @@
 		<form-bean name="registerActivityForm"
 			type="main.java.com.beauty.form.RegisterActivityForm" />
 		<form-bean name="postActivityForm" type="main.java.com.beauty.form.PostActivityForm" />
+		<form-bean name="contactUsForm"
+			type="main.java.com.beauty.form.ContactUsForm" />
 	</form-beans>
 
 	<global-forwards>
@@ -30,8 +32,15 @@
 			type="org.springframework.web.struts.DelegatingActionProxy" name="loginActivityForm"
 			input="login.page" validate="true" scope="request">
 			<!-- <forward name="success_admin" path="admin.home.page" /> -->
-			<forward name="success" redirect="true" path="/viewPosts.do" />
+			<forward name="success" redirect="true" path="/viewPostsAdmin.do" />
 			<forward name="failure" redirect="true" path="/login.do" />
+		</action>
+		
+		<action path="/logoutActivity"
+		    parameter="method"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			scope="request">
+			<forward name="success" redirect="true" path="/login.do" />
 		</action>
 
 		<action path="/register" type="org.apache.struts.actions.ForwardAction"
@@ -56,7 +65,7 @@
 			    input="post.create.page" 
 			    cancellable="true">
 			<forward name="success_display" path="post.create.page" />
-			<forward name="success" redirect="true" path="/viewPosts.do" />
+			<forward name="success" redirect="true" path="/viewPostsAdmin.do" />
 			<forward name="failure" redirect="true" path="/createPost.do" />
 		</action>
 
@@ -64,9 +73,11 @@
 			type="org.springframework.web.struts.DelegatingActionProxy"
 			parameter="method" scope="request">
 			<forward name="success" path="post.create.page" />
+			<forward name="success_delete" redirect="true" path="/viewPostsAdmin.do" />
+			<forward name="failure_delete" redirect="true" path="/viewPostsAdmin.do" />
 		</action>
 
-		<action path="/viewPosts"
+		<action path="/viewPostsAdmin"
 			type="org.springframework.web.struts.DelegatingActionProxy" validate="false"
 			scope="request">
 			<forward name="success" path="user.home.page" />
@@ -78,7 +89,7 @@
 			scope="request">
 			<forward name="success" path="post.detail.view.page" />
 			<forward name="success_post" path="post.view.page" />
-			<forward name="failure" redirect="true" path="/viewPosts.do" />
+			<forward name="failure" redirect="true" path="/viewPostsAdmin.do" />
 		</action>
 		
     <!-- ===================================== -->
@@ -97,7 +108,24 @@
 			type="org.springframework.web.struts.DelegatingActionProxy"
 			scope="request">
 			<forward name="success_post" path="pax.post.view.page" />
+			<forward name="success_horizon_view" path="pax.horizon.post.view.page" />
 			<forward name="failure" redirect="true" path="/homePage.do" />
+		</action>
+			
+	    <action path="/contactUs"
+		    parameter="method"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			scope="request">
+			<forward name="success_display" path="pax.contact.page" />
+		</action>
+		
+		<action path="/contactUsActivity"
+	        name="contactUsForm"
+		    parameter="method"
+		    input="pax.contact.page"
+			type="org.springframework.web.struts.DelegatingActionProxy"
+			scope="request">
+			<forward name="success" redirect="true" path="/contactUs.do?method=display" />
 		</action>
 
 	</action-mappings>

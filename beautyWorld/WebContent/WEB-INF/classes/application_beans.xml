@@ -20,6 +20,11 @@
 			<ref bean="registerActivityService" />
 		</property>
 	</bean>
+	
+	<bean name="/logoutActivity" class="main.java.com.beauty.action.LogoutActivityAction"
+		singleton="false">
+	</bean>
+	
 	<bean name="/registrationActivity" class="main.java.com.beauty.action.RegisterActivityAction"
 		singleton="false">
 		<property name="registerActivityService">
@@ -41,7 +46,7 @@
 		</property>
 	</bean>
 
-	<bean name="/viewPosts" class="main.java.com.beauty.action.ViewPostsAction" 
+	<bean name="/viewPostsAdmin" class="main.java.com.beauty.action.ViewPostsAction" 
 		singleton="false">
 		<property name="postActivityService">
 			<ref bean="postActivityService" />
@@ -67,6 +72,17 @@
 		<property name="postActivityService">
 			<ref bean="postActivityService" />
 		</property>
+	</bean>
+	
+	<bean name="/contactUsActivity" class="main.java.com.beauty.action.SendEmailAction" 
+		singleton="false">
+		<property name="registerActivityService">
+			<ref bean="registerActivityService" />
+		</property>
+	</bean>
+	
+	<bean name="/contactUs" class="main.java.com.beauty.action.SendEmailAction" 
+		singleton="false">
 	</bean>
 
 	<!-- DAO Beans Declaration -->

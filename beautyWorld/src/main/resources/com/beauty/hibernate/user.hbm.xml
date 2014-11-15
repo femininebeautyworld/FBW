@@ -23,5 +23,6 @@
 		<property name="country" type="java.lang.String" column="COUNTRY" />
 		<property name="zipcode" type="java.lang.Long" column="ZIPCODE" />
 		<property name="password" type="java.lang.String" column="PASSWORD" />
+		<property name="role" type="java.lang.String" column="ROLE" />
 	</class>
 </hibernate-mapping>

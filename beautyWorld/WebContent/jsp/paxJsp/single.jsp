@@ -36,9 +36,9 @@
 									});
 								</script>
 								<!--//Multi_Pic_inside_content-->
-								<div id="wrapper">
+								<div id="wrapper" align="center">
 									<br> <br> <br> <br>
-									<h1 class="single_title" align="center">
+									<h1 class="single_title">
 										<c:out value="${post.postTitle}" />
 									</h1>
 									<!-- Slideshow 1 -->
@@ -49,7 +49,7 @@
 													<p style="color: #222222;" align="left">
 														<span style="color: #666666;"> 
 														    <c:if test="${post.postViewType ne 'straight'}">
-																<c:out value="${postPictureContent.postPictureDescription}" escapeXml="false" />
+																<c:out value="${postPictureContent.postPictureDescription}" escapeXml="false"/>
 															</c:if>
 														</span>
 													</p></li>
@@ -57,7 +57,7 @@
 										</ul>
 									</div>
 									<c:if test="${post.postViewType eq 'straight'}">
-										<c:out value="${post.postDescription}" escapeXml="false" />
+										<c:out value="${post.postDescription}" escapeXml="false"/>
 									</c:if>
 								</div>
 							</c:if>
@@ -67,7 +67,8 @@
 								<br>
 								<br>
 								<br>
-								<h1 class="single_title" align="center">
+								<div align="center">
+								<h1 class="single_title" >
 									<c:out value="${post.postTitle}" />
 								</h1>
 								<!--//Single_Pic_inside_content-->
@@ -79,8 +80,9 @@
 									</p>
 								</c:forEach>
 								<p style="color: #222222;">
-									<span style="color: #666666;"><c:out value="${post.postDescription}" escapeXml="false" /></span>
+									<span style="color: #666666;"><c:out value="${post.postDescription}" escapeXml="false"/></span>
 								</p>
+								</div>
 								<!--//Single_Pic_inside_content-->
 							</c:if>
 						</c:when>
@@ -89,18 +91,20 @@
 							<br>
 							<br>
 							<br>
-							<h1 class="single_title" align="center">
+							<div align="center">
+							<h1 class="single_title">
 								<c:out value="${post.postTitle}" />
 							</h1>
 							<c:forEach var="postVideoContent" items="${post.postVideoContents}" varStatus="loop">
 								<!--//video_inside_content-->
 								<p>
-									<iframe frameborder="0" width="850" height="480" allowfullscreen="allowfullscreen" src="${postVideoContent.postVideoUrl}"> </iframe>
+									<iframe frameborder="0" width="850" height="480" allowfullscreen="allowfullscreen" src="//${postVideoContent.postVideoUrl}"> </iframe>
 								</p>
 								<p style="color: #222222;">
-									<span style="color: #666666;"><c:out value="${post.postDescription}" escapeXml="false" /></span>
+									<span style="color: #666666;"><c:out value="${post.postDescription}" escapeXml="false"/></span>
 								</p>
 							</c:forEach>
+	                        </div>
 						</c:otherwise>
 					</c:choose>
 				</div>

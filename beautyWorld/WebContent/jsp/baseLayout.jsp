@@ -18,7 +18,7 @@
 				<!-- start content -->
 				<div id="content"><br><br>
 					<div align="right">
-						<b>feminineBeautyWorld.com</b>|<a id="logOffButton" class="logOffButton" href="<%=RequestUtils.getBaseURI(request)%>/login.do">Log off</a>
+						<b>feminineBeautyWorld.com</b>|<a id="logOffButton" class="logOffButton" href="<%=RequestUtils.getBaseURI(request)%>/logoutActivity.do">Log off</a>
 					</div>
 					<div class="post">
 						<tiles:insert attribute="body" />

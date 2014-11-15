@@ -4,11 +4,13 @@
 
 package main.java.com.beauty.form;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+import java.util.Locale;
+import java.util.TreeSet;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -38,6 +40,7 @@ public class PostActivityForm extends ActionForm {
 	private String postViewType;
 	private String postDescription;
 	private String dateCreated;
+	private String datePublished;
 	private String method;
 	private List<PictureContentBean> pictureContents;
 	private List<PostVideoContent> videoContents;
@@ -45,7 +48,6 @@ public class PostActivityForm extends ActionForm {
 	private int pictureContentsListCount = 0;
 	private int videoContentsListSize = 0;
 	private int videoContentsListCount = 0;
-	
 
 	public String getPostTitle() {
 		return postTitle;
@@ -90,11 +92,11 @@ public class PostActivityForm extends ActionForm {
 	}
 
 	public List<PostVideoContent> getVideoContents() {
-		/*if (videoContents == null) {
-			this.videoContents = new ArrayList<PostVideoContent>();
-			PostVideoContent postVideoContent = new PostVideoContent();
-			this.videoContents.add(postVideoContent);
-		}*/
+		/*
+		 * if (videoContents == null) { this.videoContents = new
+		 * ArrayList<PostVideoContent>(); PostVideoContent postVideoContent =
+		 * new PostVideoContent(); this.videoContents.add(postVideoContent); }
+		 */
 		return videoContents;
 	}
 
@@ -131,7 +133,7 @@ public class PostActivityForm extends ActionForm {
 			} else {
 				pictureContents = getEmptyPictureContents(1);
 			}
-			
+
 			if (request.getSession().getAttribute("videoContentsListSize") != null) {
 				Integer videoContentsCount = (Integer) request.getSession()
 						.getAttribute("videoContentsListSize");
@@ -162,10 +164,10 @@ public class PostActivityForm extends ActionForm {
 	public List<PostVideoContent> getEmptyVideoContents(int videoContentsCount) {
 		List<PostVideoContent> videoContentsList = new ArrayList<PostVideoContent>();
 
-		/*if (videoContentsCount == 1) {
-			PostVideoContent postVideoContent = new PostVideoContent();
-			videoContentsList.add(postVideoContent);
-		}*/
+		/*
+		 * if (videoContentsCount == 1) { PostVideoContent postVideoContent =
+		 * new PostVideoContent(); videoContentsList.add(postVideoContent); }
+		 */
 
 		for (int i = 0; i < videoContentsCount; i++) {
 			PostVideoContent postVideoContent = new PostVideoContent();
@@ -178,7 +180,7 @@ public class PostActivityForm extends ActionForm {
 		PictureContentBean postPictureContent = new PictureContentBean();
 		this.pictureContents.add(postPictureContent);
 	}
-	
+
 	public void addEmptyVideoContents() {
 		PostVideoContent postVideoContent = new PostVideoContent();
 		this.videoContents.add(postVideoContent);
@@ -192,33 +194,34 @@ public class PostActivityForm extends ActionForm {
 		this.videoContents.remove(this.videoContents.size() - 1);
 	}
 
-	public Posts toDomainObject(Posts post) {
+	public Posts toDomainObject(Posts post) throws ParseException {
 
 		Date date = new Date();
 		post.setPostTitle(this.postTitle);
 		post.setPostType(this.postType);
 		post.setPostViewType(this.postViewType);
-		if (this.postDescription != null || ! this.postDescription.isEmpty() ) {
-			post.setPostDescription(this.postDescription.replaceAll("\\<.*?>",
-					""));
-		}
+		/*if (this.postDescription != null) {
+			Clob clob = Hibernate.createClob(this.postDescription);
+			post.setPostDescription(clob);
+		}*/
+		post.setPostDescription(this.postDescription);
 		post.setDateCreated(date);
-		if (post != null && post.getPostId() != null) {
-			post.setDatePublished(date);
-		}
+		post.setDatePublished(new SimpleDateFormat("MM/dd/yyyy")
+				.parse(this.datePublished));
 		post.setPostPictureContents(toPictureContentDomainObject(post));
 		post.setPostVideoContents(toVideoContentDomainObject(post));
 
 		return post;
 	}
 
-	private Set<PostPictureContent> toPictureContentDomainObject(Posts post) {
+	private TreeSet<PostPictureContent> toPictureContentDomainObject(Posts post) {
 
-		Set<PostPictureContent> pictureContentsSet = new HashSet<PostPictureContent>();
+		TreeSet<PostPictureContent> pictureContentsSet = new TreeSet<PostPictureContent>();
 		for (PictureContentBean picContent : this.pictureContents) {
 			PostPictureContent postPictureContent = new PostPictureContent();
 			postPictureContent.setPostPicture(picContent.getImageDirPath());
-			if (picContent.getPostPictureDescription() != null || ! picContent.getPostPictureDescription().isEmpty() ) {
+			if (picContent.getPostPictureDescription() != null
+					|| !picContent.getPostPictureDescription().isEmpty()) {
 				postPictureContent.setPostPictureDescription(picContent
 						.getPostPictureDescription().replaceAll("\\<.*?>", ""));
 			}
@@ -229,9 +232,9 @@ public class PostActivityForm extends ActionForm {
 		return pictureContentsSet;
 	}
 
-	private Set<PostVideoContent> toVideoContentDomainObject(Posts post) {
-		Set<PostVideoContent> videoContentsSet = new HashSet<PostVideoContent>();
-		if ( (this.videoContents != null || ! this.videoContents.isEmpty() ) ) {
+	private TreeSet<PostVideoContent> toVideoContentDomainObject(Posts post) {
+		TreeSet<PostVideoContent> videoContentsSet = new TreeSet<PostVideoContent>();
+		if ((this.videoContents != null || !this.videoContents.isEmpty())) {
 			for (PostVideoContent vidContent : this.videoContents) {
 				PostVideoContent postVideoContent = new PostVideoContent();
 				postVideoContent.setPostVideoUrl(vidContent.getPostVideoUrl());
@@ -282,7 +285,9 @@ public class PostActivityForm extends ActionForm {
 		this.postTitle = post.getPostTitle();
 		this.postType = post.getPostType();
 		this.postViewType = post.getPostViewType();
-		this.postDescription = post.getPostDescription();
+		this.datePublished = new SimpleDateFormat("MM/dd/yyyy", Locale.US)
+				.format(post.getDatePublished());
+		this.postDescription = post.toString();
 	}
 
 	public int getPictureContentsListSize() {
@@ -316,7 +321,7 @@ public class PostActivityForm extends ActionForm {
 	public void setVideoContentsListCount(int videoContentsListCount) {
 		this.videoContentsListCount = videoContentsListCount;
 	}
-	
+
 	public int getVideoContentsListSize() {
 		if (this.videoContents != null) {
 			return this.videoContents.size();
@@ -327,6 +332,14 @@ public class PostActivityForm extends ActionForm {
 
 	public void setVideoContentsListSize(int videoContentsListSize) {
 		this.videoContentsListSize = videoContentsListSize;
+	}
+
+	public String getDatePublished() {
+		return datePublished;
+	}
+
+	public void setDatePublished(String datePublished) {
+		this.datePublished = datePublished;
 	}
 
 }

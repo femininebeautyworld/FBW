@@ -8,6 +8,7 @@ import java.security.spec.InvalidKeySpecException;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -30,7 +31,6 @@ public class LoginActivityAction extends Action {
 
 	private final String SUCCESS = "success";
 	private final String FAILURE = "failure";
-	private final String SUCCESS_ADMIN = "success_admin";
 
 	private RegisterActivityService registerActivityService;
 
@@ -58,10 +58,19 @@ public class LoginActivityAction extends Action {
 					generatedSecuredPasswordHash);
 		}
 		if (matched) {
-			return mapping.findForward(SUCCESS);
+			request.getSession().setAttribute("user", user);
+			if (user.getRole().equals("admin")) {
+				// setting session to expiry in 30 mins
+				request.getSession().setMaxInactiveInterval(30 * 60);
+				Cookie userName = new Cookie("user", user.getRole());
+				userName.setMaxAge(30 * 60);
+				response.addCookie(userName);
+				return mapping.findForward(SUCCESS);
+			}
 		} else {
 			return mapping.findForward(FAILURE);
 		}
+		return null;
 	}
 
 	private static boolean validatePassword(String originalPassword,

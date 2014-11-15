@@ -3,6 +3,8 @@
  */
 package main.java.com.beauty.beans;
 
+import java.util.Date;
+
 /**
  * @author vinay
  * 
@@ -11,6 +13,7 @@ public class HomePostsContentBean {
 	private Long postId;
 	private String postTitle;
 	private String postType;
+	private Date postPublishedDate;
 	private String postDescription;
 	private String postPictureUrl;
 	private String postVidUrl;
@@ -88,6 +91,14 @@ public class HomePostsContentBean {
 
 	public void setImageHeight(int imageHeight) {
 		this.imageHeight = imageHeight;
+	}
+
+	public Date getPostPublishedDate() {
+		return postPublishedDate;
+	}
+
+	public void setPostPublishedDate(Date postPublishedDate) {
+		this.postPublishedDate = postPublishedDate;
 	}
 
 }

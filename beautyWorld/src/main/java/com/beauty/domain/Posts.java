@@ -4,8 +4,9 @@
 package main.java.com.beauty.domain;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.SortedSet;
+
+import org.apache.commons.lang.StringEscapeUtils;
 
 /**
  * @author vinay
@@ -20,18 +21,8 @@ public class Posts {
 	private String postDescription;
 	private Date dateCreated;
 	private Date datePublished;
-	private Set<PostPictureContent> postPictureContents = new HashSet<PostPictureContent>();
-	private Set<PostVideoContent> postVideoContents = new HashSet<PostVideoContent>();
-
-/*	public Posts(String postTitle, String postType, String postViewType,
-			Date dateCreated, Date datePublished ) {
-		super();
-		this.postTitle = postTitle;
-		this.postType = postType;
-		this.postViewType = postViewType;
-		this.dateCreated = dateCreated;
-		this.datePublished = datePublished;
-	}*/
+	private SortedSet<PostPictureContent> postPictureContents;
+	private SortedSet<PostVideoContent> postVideoContents;
 
 	public Long getPostId() {
 		return postId;
@@ -81,29 +72,29 @@ public class Posts {
 		this.datePublished = datePublished;
 	}
 
-	public Set<PostPictureContent> getPostPictureContents() {
+	public SortedSet<PostPictureContent> getPostPictureContents() {
 		return postPictureContents;
 	}
 
 	public void setPostPictureContents(
-			Set<PostPictureContent> postPictureContents) {
+			SortedSet<PostPictureContent> postPictureContents) {
 		this.postPictureContents = postPictureContents;
 	}
 
-	public Set<PostVideoContent> getPostVideoContents() {
+	public SortedSet<PostVideoContent> getPostVideoContents() {
 		return postVideoContents;
 	}
 
-	public void setPostVideoContents(Set<PostVideoContent> postVideoContents) {
+	public void setPostVideoContents(
+			SortedSet<PostVideoContent> postVideoContents) {
 		this.postVideoContents = postVideoContents;
 	}
 
 	public String getPostDescription() {
-		return postDescription;
+		return StringEscapeUtils.unescapeHtml(postDescription);
 	}
 
 	public void setPostDescription(String postDescription) {
 		this.postDescription = postDescription;
 	}
-
 }

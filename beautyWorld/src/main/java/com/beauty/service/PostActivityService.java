@@ -3,8 +3,10 @@
  */
 package main.java.com.beauty.service;
 
+import java.sql.SQLException;
 import java.util.List;
 
+import main.java.com.beauty.beans.HomePostsContentBean;
 import main.java.com.beauty.domain.Posts;
 
 /**
@@ -19,6 +21,8 @@ public interface PostActivityService {
 
 	Posts getPostById(Long postId);
 
-	List<Object[]> getPostsByPostType(String postType);
+	List<HomePostsContentBean> getPostsByPostType(String postType, int rowNumStart, int rowNumEnd) throws SQLException;
+
+	void deletePostById(Long postId);
 
 }

@@ -6,7 +6,9 @@ package main.java.com.beauty.action;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.math.BigDecimal;
+import java.sql.Clob;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -32,8 +34,10 @@ import org.codehaus.jackson.map.ObjectMapper;
  */
 public class PostActivityAction extends DispatchAction {
 	private final String SUCCESS_DISPLAY = "success_display";
+	private final String SUCCESS_DELETE = "success_delete";
 	private final String SUCCESS = "success";
 	private final String FAILURE = "failure";
+	private final String FAILURE_DELETE = "failure_delete";
 
 	private PostActivityService postActivityService;
 
@@ -110,6 +114,7 @@ public class PostActivityAction extends DispatchAction {
 		try {
 			postActivityService.save(post);
 		} catch (Exception e) {
+			log.error(e);
 			return mapping.findForward(FAILURE);
 		}
 		System.out.println("Object saved successfully.....!!");
@@ -129,6 +134,20 @@ public class PostActivityAction extends DispatchAction {
 		request.setAttribute("postActivityForm", postActivityForm);
 		return mapping.findForward(SUCCESS);
 
+	}
+
+	public ActionForward deletePost(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		Long postId = Long.parseLong(request.getParameter("postId"));
+		try {
+			postActivityService.deletePostById(postId);
+		} catch (Exception e) {
+			log.error(e);
+			return mapping.findForward(FAILURE_DELETE);
+		}
+
+		return mapping.findForward(SUCCESS_DELETE);
 	}
 
 	public ActionForward addAnotherPictureFields(ActionMapping mapping,
@@ -215,91 +234,28 @@ public class PostActivityAction extends DispatchAction {
 
 		String postType = request.getParameter("postType");
 		String callType = request.getParameter("callType");
-		int min = 1;
-		int max = 6;
-		int maxLength = 150;
-
-		List<Object[]> posts = postActivityService.getPostsByPostType(postType);
-
-		List<HomePostsContentBean> assignedPosts = new ArrayList<HomePostsContentBean>();
-
-		for (Object[] obj : posts) {
-
-			HomePostsContentBean homePostsContentBean = new HomePostsContentBean();
-			BigDecimal bg1 = (BigDecimal) obj[0];
-			homePostsContentBean.setPostId(bg1.longValue());
-			homePostsContentBean.setPostTitle((String) obj[1]);
-			homePostsContentBean.setPostType((String) obj[2]);
-			if (obj[3] != null) {
-				if (obj[3].toString().length() > maxLength) {
-					homePostsContentBean.setPostDescription(((String) obj[3])
-							.replaceAll("\\<.*?>", "").substring(0, maxLength));
-				} else {
-					homePostsContentBean.setPostDescription(((String) obj[3])
-							.replaceAll("\\<.*?>", ""));
-				}
-			}
-			homePostsContentBean.setPostPictureUrl((String) obj[4]);
-			homePostsContentBean.setPostVidUrl((String) obj[5]);
-			if (obj[6] != null) {
-				if (obj[6].toString().length() > maxLength) {
-					homePostsContentBean.setPostVideoDesc(((String) obj[6])
-							.replaceAll("\\<.*?>", "").substring(0, maxLength));
-				} else {
-					homePostsContentBean.setPostVideoDesc(((String) obj[6])
-							.replaceAll("\\<.*?>", ""));
-				}
-			}
-
-			if (homePostsContentBean.getPostPictureUrl() != null) {
-				Random rand = new Random();
-				int option = rand.nextInt((max - min) + 1) + min;
-
-				switch (option) {
-				case 1:
-					homePostsContentBean.setImageWidth(1024);
-					homePostsContentBean.setImageHeight(1024);
-					break;
-
-				case 2:
-					homePostsContentBean.setImageWidth(900);
-					homePostsContentBean.setImageHeight(600);
-					break;
-
-				case 3:
-					homePostsContentBean.setImageWidth(683);
-					homePostsContentBean.setImageHeight(1024);
-					break;
-
-				case 4:
-					homePostsContentBean.setImageWidth(683);
-					homePostsContentBean.setImageHeight(957);
-					break;
-
-				case 5:
-					homePostsContentBean.setImageWidth(1024);
-					homePostsContentBean.setImageHeight(662);
-					break;
-
-				case 6:
-					homePostsContentBean.setImageWidth(798);
-					homePostsContentBean.setImageHeight(1024);
-					break;
-				}
-			}
-
-			assignedPosts.add(homePostsContentBean);
-
+		
+		int pageNumber;
+		int postsPerPage=12;
+		if (request.getParameter("pageNumber") != null) {
+			pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
+		} else {
+			pageNumber = 1;
 		}
+		int rowNumStart = ( pageNumber - 1 ) * postsPerPage;
+		int rowNumEnd = postsPerPage*pageNumber;
+
+		List<HomePostsContentBean> posts = postActivityService.getPostsByPostType(postType, rowNumStart, rowNumEnd);
 		if (callType != null) {
 			ObjectMapper mapper = new ObjectMapper();
-			String errorsJson = mapper.writeValueAsString(assignedPosts);
+			String errorsJson = mapper.writeValueAsString(posts);
 			response.setContentType("application/json");
 			response.getOutputStream().print(errorsJson);
 			return null;
 		}
 
-		request.setAttribute("posts", assignedPosts);
+		request.setAttribute("posts", posts);
+		request.setAttribute("pageNumber", pageNumber+1);
 
 		return mapping.findForward(SUCCESS);
 	}

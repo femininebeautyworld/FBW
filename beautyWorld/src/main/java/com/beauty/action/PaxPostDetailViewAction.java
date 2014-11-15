@@ -22,6 +22,8 @@ public class PaxPostDetailViewAction extends DispatchAction {
 
 	private final String SUCCESS_POST = "success_post";
 	private final String FAILURE = "failure";
+	private final String SUCCESS_HORIZON_VIEW = "success_horizon_view";
+	private final String HORIZON_VIEW = "alternateHorizontal";
 
 	private PostActivityService postActivityService;
 
@@ -40,8 +42,13 @@ public class PaxPostDetailViewAction extends DispatchAction {
 		} catch (Exception e) {
 			return mapping.findForward(FAILURE);
 		}
-
 		request.setAttribute("post", post);
+        response.setContentType("text/html");
+		
+		if( post.getPostViewType().equals(HORIZON_VIEW) )
+		{
+		  return mapping.findForward(SUCCESS_HORIZON_VIEW);
+		}
 
 		return mapping.findForward(SUCCESS_POST);
 	}

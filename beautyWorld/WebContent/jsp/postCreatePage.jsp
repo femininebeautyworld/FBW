@@ -10,7 +10,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Create Post</title>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-<script type="text/javascript" src="js/tiny_mce/tiny_mce.js"></script>
+<script type="text/javascript" src="<%=RequestUtils.getBaseURI(request)%>/js/tiny_mce/tiny_mce.js"></script>
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+<!-- jQuery Code executes on Date Format option ----->
+<script src="<%=RequestUtils.getBaseURI(request)%>/js/script.js"></script>
+<link rel="stylesheet" href="<%=RequestUtils.getBaseURI(request)%>/css/date.css">
+
 <script type="text/javascript">
 tinyMCE.init({
         // General options
@@ -44,6 +51,10 @@ tinyMCE.init({
         bkLib.onDomLoaded(function() { nicEditors.allTextAreas() }); // convert all text areas to rich text editor on that page
 </script> -->
 <script type="text/javascript">
+$(document).ready(function () {
+    $('#confirmOverlay').hide();
+});
+
 function showDiv() {
 	   document.getElementById('confirmOverlay').style.display = 'block';
 	}
@@ -331,9 +342,11 @@ function hideTextAreaDiv() {
 			<html:hidden property="method" />
 			<html:hidden property="pictureContentsListSize" />
 			<html:hidden property="pictureContentsListCount" />
-			<% 
-			Integer pictureContentsListSize = (Integer)request.getSession().getAttribute("pictureContentsListSize");
-		    request.getSession().setAttribute("pictureContentsListSize", pictureContentsListSize); 
+			<%
+				Integer pictureContentsListSize = (Integer) request
+							.getSession().getAttribute("pictureContentsListSize");
+					request.getSession().setAttribute("pictureContentsListSize",
+							pictureContentsListSize);
 			%>
 			<table>
 				<tbody>
@@ -360,10 +373,14 @@ function hideTextAreaDiv() {
 					<tr>
 						<td>Post Display Type:</td>
 						<td><html:select styleId="view" styleClass="register-input-highlight" property="postViewType" size="3">
-								<html:option value="" disabled="true">none</html:option>
 								<html:option value="straight">Straight View</html:option>
-								<html:option value="alternate">Alternate View</html:option>
+								<html:option value="alternate">Slide View</html:option>
+								<html:option value="alternateHorizontal">Alternate Horizontal View</html:option>
 							</html:select></td>
+					</tr>
+					<tr>
+					<td>Date:</td> 
+					<td><html:text styleId="datepicker" styleClass="register-input-highlight" property="datePublished" maxlength="100" size="20" /></td>
 					</tr>
 					<tr>
 						<td>Post Description:</td>
@@ -373,12 +390,12 @@ function hideTextAreaDiv() {
 					<c:forEach var="pictureContents" items="${postActivityForm.pictureContents}">
 						<tr id="c1">
 							<td>Upload Post Picture:</td>
-							<td><br> <html:file styleClass="register-input-highlight" indexed="true" name="pictureContents" property="postPicture" styleId="postPicture" size="40" /></td>
+							<td><br> <html:file styleClass="register-input-highlight" indexed="true" name="pictureContents" property="postPicture" styleId="postPicture" size="40" /><font size="3" color="#FF0000"><c:out value="${pictureContents.postPicture}"/></font></td>
 						</tr>
 						<tr id="c2">
 							<td>Post Picture Description:</td>
-							<td><br> <html:textarea style="width: 604px; height: 150px;" styleClass="register-input-highlight" indexed="true" name="pictureContents" property="postPictureDescription" styleId="postPictureDescription" rows="4"
-									cols="50" /></td>
+							<td><br> <html:textarea style="width: 604px; height: 150px;" styleClass="register-input-highlight" indexed="true" name="pictureContents" property="postPictureDescription"
+									styleId="postPictureDescription" rows="4" cols="50" /></td>
 						</tr>
 					</c:forEach>
 
@@ -407,7 +424,8 @@ function hideTextAreaDiv() {
 					</tr>
 					<tr>
 						<td></td>
-						<td><br> <button type="button" class="button" onclick="setDispatchAndSubmit('createPost')">Submit</button>&nbsp;&nbsp;
+						<td><br>
+							<button type="button" class="button" onclick="setDispatchAndSubmit('createPost')">Submit</button>&nbsp;&nbsp;
 							<button type="button" class="button" onclick="showDiv()">Cancel</button></td>
 					</tr>
 
@@ -419,7 +437,7 @@ function hideTextAreaDiv() {
 					<h3>Are you sure. Do you want to cancel the changes ?</h3>
 
 					<div id="confirmButtons" align="center">
-						<a id="yesButton" class="buttonBlue" href="<%=RequestUtils.getBaseURI(request)%>/viewPosts.do">Yes<span></span></a> <a id="noButton" class="buttonRed" href="#" onclick="hideDiv()">No<span></span></a>
+						<a id="yesButton" class="buttonBlue" href="<%=RequestUtils.getBaseURI(request)%>/viewPostsAdmin.do">Yes<span></span></a> <a id="noButton" class="buttonRed" href="#" onclick="hideDiv()">No<span></span></a>
 					</div>
 				</div>
 			</div>

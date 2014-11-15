@@ -3,28 +3,11 @@
 <html>
 <head>
 <jsp:include page="linkCss.jsp" />
-<script>
-	function callRegisterAction() {
-		location.href = "http://localhost:8080/beautyWorld/register.do";
-	}
-</script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Sign in</title>
 </head>
 <body>
 	<div align="center">
-		<div align="center">
-			<font class="rainbow" face="courier;bold;" size="7">Welcome to Feminine Beauty World</font>
-		</div>
-		<br>
-		<div align="center">
-			<font color="#A0CFEC" face="courier;bold;" size="4">New to Feminine Beauty World?</font>
-		</div>
-		<div align="center">Get started now. It's fast and easy!</div>
-		<br>
-		<div align="center">
-			<html:submit styleClass="button" value="Register" onclick="callRegisterAction()"></html:submit>
-		</div>
 		<div align="left">
 			<font size="3" color="#FF0000"> <%
  	if ( request.getAttribute("alreadyExistingAccountError") != null ) {%> <%=request.getAttribute("alreadyExistingAccountError")%> <%
@@ -33,6 +16,9 @@
 			</font>
 		</div>
 		<div align="left">
+		<br>
+		<br>
+		    <div align="center"><font class="rainbow" face="courier;bold;" size="5">Welcome to Feminine Beauty World</font></div>
 			<h3>Sign in</h3>
 			<html:form action="/loginActivity">
 				<div align="left"></div>

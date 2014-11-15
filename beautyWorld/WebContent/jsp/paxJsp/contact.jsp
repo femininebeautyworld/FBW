@@ -1,34 +1,63 @@
-<p>
-	<span style="color: #555555;">Use Free Plugin “</span><a target="_blank" href="https://wordpress.org/plugins/very-simple-contact-form/">Very Simple Contact Form</a><span style="color: #555555;">”</span>
-</p>
+<%@ include file="/jsp/taglib.jspf"%>
 
-<form action="" method="post" id="vscf" class="vscf">
-	<div>
-		<label for="vscf_name">
-			Name: <span class="error  hide">Please enter at least 3 characters</span>
-		</label>
-		<input type="text" value="" maxlength="50" class="" id="vscf_name" name="form_name">
-	</div>
-	<div>
-		<label for="vscf_email">
-			Email: <span class="error  hide">Please enter a valid email</span>
-		</label>
-		<input type="text" value="" maxlength="50" class="" id="vscf_email" name="email">
-	</div>
-	<div>
-		<label for="vscf_subject">
-			Subject: <span class="error  hide">Please enter at least 3 characters</span>
-		</label>
-		<input type="text" value="" class="" maxlength="50" id="vscf_subject" name="form_subject">
-	</div>
-	<div>
-		<label for="vscf_message">
-			Message: <span class="error  hide">Please enter at least 10 characters</span>
-		</label>
-		<textarea class="" rows="10" id="vscf_message" name="form_message"></textarea>
+<div id="content">
+	<!-- <div class="container">-->
+
+	<div id="single_cont">
+
+		<div class="single_left">
+
+			<div class="single_inside_content">
+
+				<p>Contact Form</p>
+				
+				<div><font color="red">${successMessage}</font></div>
+
+				<form id="vscf" class="vscf" enctype="multipart/form-data" action="/beautyWorld/contactUsActivity.do?method=submit" method="post" name="contactUsForm">
+					<div>
+						<label for="vscf_name">
+							Name: <span class="error"><html:errors property="name" /></span>
+						</label>
+						<input type="text" value="" maxlength="50" class="" id="vscf_name" name="name">
+					</div>
+					<div>
+						<label for="vscf_email">
+							Email: <span class="error"><html:errors property="email" /></span>
+						</label>
+						<input type="text" value="" maxlength="50" class="" id="vscf_email" name="email">
+					</div>
+					<div>
+						<label for="vscf_subject">
+							Subject: <span class="error"><html:errors property="subject" /></span>
+						</label>
+						<input type="text" value="" class="" maxlength="50" id="vscf_subject" name="subject">
+					</div>
+					<div>
+						<label for="vscf_message">
+							Message: <span class="error"><html:errors property="message" /></span>
+						</label>
+						<textarea class="" rows="10" id="vscf_message" name="message"></textarea>
+
+					</div>
+					<div>
+						<input type="submit" id="vscf_send" name="form_send" value="Submit" >
+					</div>
+				</form>
+
+			</div>
+			<!--//single_inside_content-->
+
+			<br> <br>
+
+		</div>
+		<!--//single_left-->
+
+
+		<div class="clear"></div>
 
 	</div>
-	<div>
-		<input type="submit" id="vscf_send" name="form_send" value="Submit">
-	</div>
-</form>
+	<!--//single_cont-->
+
+	<!-- </div> -->
+	<!--//container-->
+</div>

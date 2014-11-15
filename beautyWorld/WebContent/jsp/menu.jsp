@@ -3,10 +3,10 @@
 	<li>
 		<h2>Categories</h2>
 		<ul>
-			<li><a href="#">About Us</a></li>
-			<li><a href="<%=RequestUtils.getBaseURI(request)%>/viewPosts.do">Home</a></li>
+			<li><a href="<%=RequestUtils.getBaseURI(request)%>/viewPostsAdmin.do">Home</a></li>
 			<li><a href="<%=RequestUtils.getBaseURI(request)%>/createPostActivity.do?method=display">Create Post</a></li>
-			<li><a href="#">Contact Us</a></li>
+			<li><a href="<%=RequestUtils.getBaseURI(request)%>/register.do">Register</a></li>
+			<li><a href="<%=RequestUtils.getBaseURI(request)%>/contactUs.do">Contact Us</a></li>
 		</ul>
 	</li>
 </ul>

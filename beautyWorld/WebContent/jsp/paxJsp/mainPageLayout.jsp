@@ -9,6 +9,7 @@
 <meta charset="utf-8">
 <title>Feminine Beauty World</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<link media="all" type="text/css" href="<%=RequestUtils.getBaseURI(request)%>/css/paxCss/vscf_style.css" id="vscf_style-css" rel="stylesheet">
 <link media="all" type="text/css" href="<%=RequestUtils.getBaseURI(request)%>/jsp/paxJsp/style.css" id="cyclone-template-style-dark-css" rel="stylesheet">
 <link media="all" type="text/css" href="<%=RequestUtils.getBaseURI(request)%>/jsp/paxJsp/style.css" id="cyclone-template-style-default-css" rel="stylesheet">
 <link media="all" type="text/css" href="<%=RequestUtils.getBaseURI(request)%>/jsp/paxJsp/style.css" id="cyclone-template-style-standard-css" rel="stylesheet">
