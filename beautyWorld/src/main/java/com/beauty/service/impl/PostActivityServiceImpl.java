@@ -5,6 +5,7 @@ package main.java.com.beauty.service.impl;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.TreeSet;
 
 import main.java.com.beauty.beans.HomePostsContentBean;
 import main.java.com.beauty.dao.PostActivityDAO;
@@ -51,6 +52,11 @@ public class PostActivityServiceImpl implements PostActivityService {
 	public void deletePostById(Long postId) {
 		Posts post = getPostById(postId);	
 		postActivityDAO.deletePost( post );	
+	}
+
+	@Override
+	public void update(Posts post) {
+		postActivityDAO.update(post);
 	}
 
 }

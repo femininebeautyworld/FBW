@@ -5,12 +5,9 @@ package main.java.com.beauty.action;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.math.BigDecimal;
-import java.sql.Clob;
-import java.util.ArrayList;
-import java.util.Date;
+import java.io.PrintWriter;
 import java.util.List;
-import java.util.Random;
+import java.util.TreeSet;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -133,6 +130,26 @@ public class PostActivityAction extends DispatchAction {
 
 		request.setAttribute("postActivityForm", postActivityForm);
 		return mapping.findForward(SUCCESS);
+	}
+
+	public ActionForward updatePost(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		PostActivityForm postActivityForm = (PostActivityForm) form;
+		Long postId = postActivityForm.getPostId();
+		Posts post = postActivityService.getPostById(postId);
+
+		post = postActivityForm.toDomainObject(post);
+
+		try {
+			postActivityService.update(post);
+		} catch (Exception e) {
+			log.error(e);
+			return mapping.findForward(FAILURE);
+		}
+		System.out.println("Object updated successfully.....!!");
+
+		return mapping.findForward(SUCCESS);
 
 	}
 
@@ -234,28 +251,30 @@ public class PostActivityAction extends DispatchAction {
 
 		String postType = request.getParameter("postType");
 		String callType = request.getParameter("callType");
-		
+
 		int pageNumber;
-		int postsPerPage=12;
+		int postsPerPage = 12;
 		if (request.getParameter("pageNumber") != null) {
 			pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
 		} else {
 			pageNumber = 1;
+
 		}
-		int rowNumStart = ( pageNumber - 1 ) * postsPerPage;
-		int rowNumEnd = postsPerPage*pageNumber;
+		int rowNumStart = (pageNumber - 1) * postsPerPage;
+		int rowNumEnd = postsPerPage * pageNumber;
 
 		List<HomePostsContentBean> posts = postActivityService.getPostsByPostType(postType, rowNumStart, rowNumEnd);
+
 		if (callType != null) {
 			ObjectMapper mapper = new ObjectMapper();
 			String errorsJson = mapper.writeValueAsString(posts);
-			response.setContentType("application/json");
-			response.getOutputStream().print(errorsJson);
+			response.setContentType("text/json");
+			PrintWriter printWriter = response.getWriter();
+			printWriter.println(errorsJson);
 			return null;
 		}
 
 		request.setAttribute("posts", posts);
-		request.setAttribute("pageNumber", pageNumber+1);
 
 		return mapping.findForward(SUCCESS);
 	}

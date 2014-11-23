@@ -340,6 +340,7 @@ function hideTextAreaDiv() {
 	<div align="left">
 		<html:form styleId="contentForm" action="/createPostActivity" method="post" enctype="multipart/form-data">
 			<html:hidden property="method" />
+			<html:hidden property="postId" />
 			<html:hidden property="pictureContentsListSize" />
 			<html:hidden property="pictureContentsListCount" />
 			<%
@@ -387,54 +388,10 @@ function hideTextAreaDiv() {
 						<td><html:textarea style="width: 604px; height: 150px;" styleClass="register-input-highlight" property="postDescription" rows="4" cols="50">
 							</html:textarea></td>
 					</tr>
-					<c:forEach var="pictureContents" items="${postActivityForm.pictureContents}" varStatus="loop">
-						<tr id="c1">
-							<td>${loop.index+1}. Upload Post Picture:</td>
-							<td><br> <html:file styleClass="register-input-highlight" indexed="true" name="pictureContents" property="postPicture" styleId="postPicture" size="40" /><font size="3" color="#FF0000"><c:out value="${pictureContents.postPicture}"/></font></td>
-						</tr>
-						<tr id="c2">
-							<td>Post Picture Description:</td>
-							<td><br> <html:textarea style="width: 604px; height: 150px;" styleClass="register-input-highlight" indexed="true" name="pictureContents" property="postPictureDescription" rows="4" cols="50" /></td>
-						</tr>
-						<tr id="pv1">
-							<td>Post Picture Video Url:</td>
-							<td><br> <html:text styleClass="register-input-highlight" indexed="true" name="pictureContents" property="postPicVideoUrl" styleId="postPicVideoUrl" maxlength="200" size="20" /></td>
-						</tr>
-						<tr id="pv2">
-							<td>Post Picture Video Description:</td>
-
-							<td><br> <html:textarea style="width: 604px; height: 150px;" styleClass="register-input-highlight" indexed="true" name="pictureContents" property="postPicVideoDesc" rows="4"
-									cols="50" /></td>
-						</tr>
-					</c:forEach>
-
-					<tr>
-						<td></td>
-						<td><a id="addButton" class="addButton" href="#" onclick="setDispatchAndSubmit( 'addAnotherPictureFields')">Add More Pictures </a> &nbsp;&nbsp;&nbsp;&nbsp; <a id="removeButton"
-							class="removeButton" href="#" onclick="setDispatchAndSubmit( 'removePictureField')">Remove Added Picture</a></td>
-					</tr>
-
-					<c:forEach var="videoContents" items="${postActivityForm.videoContents}" varStatus="loopVid">
-						<tr id="v1">
-							<td>${loopVid.index+1}. Post Video Url:</td>
-							<td><br> <html:text styleClass="register-input-highlight" indexed="true" name="videoContents" property="postVideoUrl" styleId="postVideoUrl" maxlength="200" size="20" /></td>
-						</tr>
-						<tr id="v2">
-							<td>Post Video Description:</td>
-
-							<td><br> <html:textarea style="width: 604px; height: 150px;" styleClass="register-input-highlight" indexed="true" name="videoContents" property="postVideoDescription" rows="4"
-									cols="50" /></td>
-						</tr>
-					</c:forEach>
-					<tr>
-						<td></td>
-						<td><a id="addVidButton" class="addVidButton" href="#" onclick="setDispatchAndSubmit( 'addAnotherVideoFields')">Add More Videos</a> &nbsp;&nbsp;&nbsp;&nbsp; <a id="removeVidButton"
-							class="removeVidButton" href="#" onclick="setDispatchAndSubmit( 'removeVideoField')">Remove Added Video</a></td>
-					</tr>
 					<tr>
 						<td></td>
 						<td><br>
-							<button type="button" class="button" onclick="setDispatchAndSubmit('createPost')">Submit</button>&nbsp;&nbsp;
+							<button type="button" class="button" onclick="setDispatchAndSubmit('updatePost')">Submit</button>&nbsp;&nbsp;
 							<button type="button" class="button" onclick="showDiv()">Cancel</button></td>
 					</tr>
 

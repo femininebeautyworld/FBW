@@ -5,8 +5,11 @@
 <%@ include file="/jsp/taglib.jspf"%>
 
 <script type="text/javascript">
-	function ajaxRequest(count) {
+    var count = 3;
+    var pgNumber = 1;
+	function ajaxRequest() {
 		var mygetrequest;
+		pgNumber = pgNumber + 1;
 		if (window.XMLHttpRequest)
 		  {// code for IE7+, Firefox, Chrome, Opera, Safari
 			mygetrequest=new XMLHttpRequest();
@@ -22,12 +25,13 @@
 						|| window.location.href.indexOf("http") == -1) {
 					var jsondata = eval("(" + mygetrequest.responseText + ")");//retrieve result as an JavaScript object
 					var rssentries = jsondata;
-					var output;
+					var output = '';
 					var host = "<%=RequestUtils.getBaseURI(request)%>";
+					count = count + 1;
 					for (var i = 0; i < rssentries.length; i++) {
 						if( i % 4 == 0)
 						{
-						output += '<div class="galcolumn" id="item'+(count)+'hmd4K" style="width: 32.5865073437889%; padding-left: 30px; padding-bottom: 30px; float: left; box-sizing: border-box;">';
+						output += '<div class="galcolumn" id="item'+(count)+'hmd4K" style="width: 32.5865073437889%; padding-left: 30px; padding-bottom: 30px; float:left; box-sizing: border-box;">';
 						}
 						output += '<div class="item stalac_box" style="margin-bottom: 30px; opacity: 1;">';
 						if( rssentries[i].postPictureUrl != null )
@@ -40,11 +44,11 @@
                                }
 						else
 							{
-							output += '<span class="stalac_box_img"> <iframe frameborder="0" width="340" height="200" allowfullscreen="" mozallowfullscreen="" webkitallowfullscreen="" src="'+rssentries[i].postVidUrl+'"></iframe></span>';
+							output += '<span class="stalac_box_img"> <iframe frameborder="0" width="340" height="200" allowfullscreen="" mozallowfullscreen="" webkitallowfullscreen="" src="//'+rssentries[i].postVidUrl+'"></iframe></span>';
 							output += '<h3> <a href="'+host+'/viewPaxDetailPost.do?method=displayPost&postId='+rssentries[i].postId+'">'+rssentries[i].postTitle+'</a></h3>';
 							if( rssentries[i].postVideoDesc != null )
 							{
-								output += '<p class="item stalac_box">'+rssentries[i].postVideoDesc+'....</p>';
+								output += '<p class="item stalac_box">'+rssentries[i].postVideoDesc.substring(0, 150)+'....</p>';
 							}
 							}
 					output += '</div>';
@@ -66,7 +70,7 @@
 				}
 			}
 		};
-	    mygetrequest.open("GET", "<%=RequestUtils.getBaseURI(request)%>/homePage.do?method=fetchResultsByPostType&callType='ajax'&pageNumber=<%=request.getAttribute("pageNumber")%>",true);
+	    mygetrequest.open("GET", "<%=RequestUtils.getBaseURI(request)%>/homePage.do?method=fetchResultsByPostType&callType='ajax'&pageNumber="+pgNumber+"",true);
 		mygetrequest.send();
 	}
 </script>
@@ -76,7 +80,7 @@
 		<!-- //stalac_box -->
 		<c:forEach var="post" items="${posts}" varStatus="loop">
 			<c:if test="${loop.index % 4 eq 0}">
-				<div class="galcolumn" id="item${count}hmd4K" style="width: 32.5865073437889%; padding-left: 30px; padding-bottom: 30px; float: left; box-sizing: border-box;">
+				<div class="galcolumn" id="item${count}hmd4K" style="width: 32.5865073437889%; padding-left: 30px; padding-bottom: 30px; float: right; box-sizing: border-box;">
 			</c:if>
 			<div class="item stalac_box" style="margin-bottom: 30px; opacity: 1;">
 				<c:choose>
@@ -94,14 +98,14 @@
 						</c:if>
 					</c:when>
 					<c:otherwise>
-						<span class="stalac_box_img"> <iframe frameborder="0" width="340" height="200" allowfullscreen="" mozallowfullscreen="" webkitallowfullscreen="" src="//${post.postVidUrl}"></iframe>
+						<span class="stalac_box_img"><iframe frameborder="0" width="340" height="200" allowfullscreen="" mozallowfullscreen="" webkitallowfullscreen="" src="//${post.postVidUrl}"></iframe>
 						</span>
 						<!-- //stalac_box_img -->
 						<h3>
 							<a href="<%=RequestUtils.getBaseURI(request)%>/viewPaxDetailPost.do?method=displayPost&postId=${post.postId}">${post.postTitle}</a>
 						</h3>
 						<c:if test="${post.postVideoDesc ne null}">
-							<p class="item stalac_box">${post.postVideoDesc}....</p>
+							<p class="item stalac_box"><c:out value="${fn:substring(post.postVideoDesc, 0, 150)}"/>....</p>
 						</c:if>
 					</c:otherwise>
 				</c:choose>
@@ -111,12 +115,18 @@
 	 <c:set var="count" scope="application" value="${count+1}"/>
 	</c:if>
 	</c:forEach>
- 
-	<div style="clear: both; height: 0px; width: 0px; display: block;" id="clearhmd4K"></div>
-	
-	<button id="button" style="width: 150px; height: 30px" type="button" onclick="ajaxRequest(${count})">View More</button>
 	
 </div>
 <!--//stalac_cont-->
+</div>
+
+<div id="home_cont" align="center"> 
+<div style="clear: both; height: 0px; width: 0px; display: block;" id="clearhmd4K"></div>
+<button id="button" style="width: 150px; height: 30px" type="button" onclick="ajaxRequest()">View More</button>
+<br>
+<br>
+<br>
+<br>
+<br>
 </div>
 <!--//home_cont-->

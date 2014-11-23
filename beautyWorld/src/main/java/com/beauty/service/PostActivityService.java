@@ -25,4 +25,6 @@ public interface PostActivityService {
 
 	void deletePostById(Long postId);
 
+	void update(Posts post);
+
 }

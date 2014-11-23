@@ -42,6 +42,10 @@
 	<definition name="create.post.page" extends="baseLayout">
 		<put name="body" value="/jsp/login.jsp" />
 	</definition>
+	
+	<definition name="post.edit.page" extends="baseLayout">
+		<put name="body" value="/jsp/postEditPage.jsp" />
+	</definition>
 
 	<definition name="post.detail.view.page" extends="baseLayout">
 		<put name="body" value="/jsp/postDetailViewPage.jsp" />

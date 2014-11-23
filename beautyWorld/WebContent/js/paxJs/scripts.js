@@ -1,14 +1,27 @@
 $(document).ready(function() {
-	
+	$("#category li").hide();
 	
     $('.header_menu li').hover(
         function () {
-            $('ul:first', this).css('display','block');
+        	$("#category li").show();
         }, 
         function () {
-            $('ul:first', this).css('display','none');         
+        	$("#category li").hide();         
         }
-    );  
+    );
+
+/*	$('ul:first', this).css('display','none');     
+	
+	$('.header_menu li').hover(
+	        function () {
+	            $('ul:first', this).css('display','block');
+	        }, 
+	        function () {
+	            $('ul:first', this).css('display','none');         
+	        }
+	    ); */ 
+    
+    
 	
 	$('.header_spacing').css('height', $('#header').outerHeight() + 'px');
 	    
@@ -17,17 +30,7 @@ $(document).ready(function() {
 	if($('#header').css('position') == 'absolute')
 		$('#header').css('top', $('.slicknav_menu').outerHeight() + 'px');
 	else
-		$('#header').css('top', '0px');                 				
-    $("#stalac_cont").gridalicious({
-        gutter: 30,
-        width: 350,
-        animate: true,
-        animationOptions: {
-                speed: 150,
-                duration: 500,
-                complete: onComplete
-        },
-    });    
+		$('#header').css('top', '0px');                 				    
     // function not used. 
     function onComplete(data) {
     }    

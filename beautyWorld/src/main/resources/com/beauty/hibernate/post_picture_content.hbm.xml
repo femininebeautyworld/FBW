@@ -19,8 +19,13 @@
 		<property name="postPicture" type="java.lang.String" column="POST_PICTURE" />
 		<property name="postPictureDescription" type="java.lang.String"
 			column="POST_PICTURE_DESCRIPTION" />
+		<property name="postPicVideoUrl" type="java.lang.String"
+			column="POST_PIC_VIDEO_URL" />
+		<property name="postPicVideoDesc" type="java.lang.String"
+			column="POST_PIC_VIDEO_DESC" />
 
-		<many-to-one name="posts" class="main.java.com.beauty.domain.Posts" fetch="select">
+		<many-to-one name="posts" class="main.java.com.beauty.domain.Posts"
+			fetch="select">
 			<column name="POST_ID" not-null="true" />
 		</many-to-one>
 

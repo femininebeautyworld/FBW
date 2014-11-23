@@ -35,6 +35,7 @@ public class PostActivityForm extends ActionForm {
    */
 	private static final long serialVersionUID = -598795880647031789L;
 
+	private Long postId;
 	private String postTitle;
 	private String postType;
 	private String postViewType;
@@ -200,16 +201,13 @@ public class PostActivityForm extends ActionForm {
 		post.setPostTitle(this.postTitle);
 		post.setPostType(this.postType);
 		post.setPostViewType(this.postViewType);
-		/*if (this.postDescription != null) {
-			Clob clob = Hibernate.createClob(this.postDescription);
-			post.setPostDescription(clob);
-		}*/
 		post.setPostDescription(this.postDescription);
 		post.setDateCreated(date);
-		post.setDatePublished(new SimpleDateFormat("MM/dd/yyyy")
-				.parse(this.datePublished));
-		post.setPostPictureContents(toPictureContentDomainObject(post));
-		post.setPostVideoContents(toVideoContentDomainObject(post));
+		post.setDatePublished(new SimpleDateFormat("MM/dd/yyyy").parse(this.datePublished));
+		if (post.getPostId() == null) {
+			post.setPostPictureContents(toPictureContentDomainObject(post));
+			post.setPostVideoContents(toVideoContentDomainObject(post));
+		}
 
 		return post;
 	}
@@ -225,6 +223,8 @@ public class PostActivityForm extends ActionForm {
 				postPictureContent.setPostPictureDescription(picContent
 						.getPostPictureDescription().replaceAll("\\<.*?>", ""));
 			}
+			postPictureContent.setPostPicVideoUrl(picContent.getPostPicVideoUrl());
+			postPictureContent.setPostPicVideoDesc(picContent.getPostPicVideoDesc());
 			postPictureContent.setPosts(post);
 			pictureContentsSet.add(postPictureContent);
 		}
@@ -282,12 +282,13 @@ public class PostActivityForm extends ActionForm {
 	}
 
 	public void populateDomainObject(Posts post) {
+		this.postId = post.getPostId();
 		this.postTitle = post.getPostTitle();
 		this.postType = post.getPostType();
 		this.postViewType = post.getPostViewType();
 		this.datePublished = new SimpleDateFormat("MM/dd/yyyy", Locale.US)
 				.format(post.getDatePublished());
-		this.postDescription = post.toString();
+		this.postDescription = post.getPostDescription();
 	}
 
 	public int getPictureContentsListSize() {
@@ -340,6 +341,14 @@ public class PostActivityForm extends ActionForm {
 
 	public void setDatePublished(String datePublished) {
 		this.datePublished = datePublished;
+	}
+
+	public Long getPostId() {
+		return postId;
+	}
+
+	public void setPostId(Long postId) {
+		this.postId = postId;
 	}
 
 }

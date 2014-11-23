@@ -14,6 +14,8 @@ public class PictureContentBean {
 	private FormFile postPicture;
 	private String postPictureDescription;
 	private String imageDirPath;
+	private String postPicVideoUrl;
+	private String postPicVideoDesc;
 
 	public PictureContentBean() {
 		super();
@@ -41,5 +43,21 @@ public class PictureContentBean {
 
 	public void setImageDirPath(String imageDirPath) {
 		this.imageDirPath = imageDirPath;
+	}
+
+	public String getPostPicVideoUrl() {
+		return postPicVideoUrl;
+	}
+
+	public void setPostPicVideoUrl(String postPicVideoUrl) {
+		this.postPicVideoUrl = postPicVideoUrl;
+	}
+
+	public String getPostPicVideoDesc() {
+		return postPicVideoDesc;
+	}
+
+	public void setPostPicVideoDesc(String postPicVideoDesc) {
+		this.postPicVideoDesc = postPicVideoDesc;
 	}
 }

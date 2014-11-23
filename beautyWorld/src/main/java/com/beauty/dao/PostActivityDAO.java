@@ -25,4 +25,6 @@ public interface PostActivityDAO {
 
 	void deletePost(Posts post);
 
+	void update(Posts post);
+
 }

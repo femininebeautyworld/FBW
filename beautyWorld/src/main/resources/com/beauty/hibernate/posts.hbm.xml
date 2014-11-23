@@ -39,7 +39,7 @@
 
 	<sql-query name="main.java.com.beauty.domain.getPostsToViewForAdmin">
 		<return alias="post" class="main.java.com.beauty.domain.Posts" />
-        <![CDATA[select * from fbm_posts post]]>
+        <![CDATA[select * from fbm_posts post order by post.date_created desc]]>
 	</sql-query>
 
 	<sql-query name="main.java.com.beauty.domain.getPostById">
@@ -52,16 +52,17 @@
 SELECT result.*
 FROM
   (SELECT res.*,
-    ROW_NUMBER() OVER (ORDER BY postDatePublished) rn
+    ROW_NUMBER() OVER (ORDER BY postDatePublished DESC) rn
   FROM
-    (SELECT p.POST_ID    AS postId,
-      p.POST_TITLE       AS postTitle,
-      p.POST_TYPE        AS postType,
-      p.POST_DESCRIPTION AS postDescription,
-      p.DATE_PUBLISHED   AS postDatePublished,
-      vpc.POST_PICTURE   AS postPictureUrl,
-      NULL               AS postVidUrl,
-      NULL               AS postVideoDesc
+    (SELECT p.POST_ID              AS postId,
+      p.POST_TITLE                 AS postTitle,
+      p.POST_TYPE                  AS postType,
+      p.POST_DESCRIPTION           AS postDescription,
+      p.DATE_PUBLISHED             AS postDatePublished,
+      vpc.POST_PICTURE             AS postPictureUrl,
+      vpc.POST_PICTURE_DESCRIPTION AS postPictureDesc,
+      NULL                         AS postVidUrl,
+      NULL                         AS postVideoDesc
     FROM fbm_posts p,
       (SELECT *
       FROM
@@ -82,6 +83,7 @@ FROM
       p.POST_DESCRIPTION   AS postDescription,
       p.DATE_PUBLISHED     AS postDatePublished,
       NULL                 AS postPictureUrl,
+      NULL                 AS postPictureDesc,
       vpvc.POST_VIDEO_URL  AS postVidUrl,
       vpvc.POST_VIDEO_DESC AS postVideoDesc
     FROM fbm_posts p,
@@ -100,7 +102,7 @@ FROM
 WHERE postDatePublished <= sysdate
 AND rn                   > :rowNumStart
 AND rn                  <= :rowNumEnd
-ORDER BY postDatePublished DESC      
+ORDER BY postDatePublished DESC   
         ]]>
 	</sql-query>
 

@@ -45,10 +45,10 @@ public class PaxPostDetailViewAction extends DispatchAction {
 		request.setAttribute("post", post);
         response.setContentType("text/html");
 		
-		if( post.getPostViewType().equals(HORIZON_VIEW) )
+/*		if( post.getPostViewType().equals(HORIZON_VIEW) )
 		{
 		  return mapping.findForward(SUCCESS_HORIZON_VIEW);
-		}
+		}*/
 
 		return mapping.findForward(SUCCESS_POST);
 	}

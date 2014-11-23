@@ -72,7 +72,7 @@
 		<action path="/editPostActivity"
 			type="org.springframework.web.struts.DelegatingActionProxy"
 			parameter="method" scope="request">
-			<forward name="success" path="post.create.page" />
+			<forward name="success" path="post.edit.page" />
 			<forward name="success_delete" redirect="true" path="/viewPostsAdmin.do" />
 			<forward name="failure_delete" redirect="true" path="/viewPostsAdmin.do" />
 		</action>

@@ -3,6 +3,8 @@
  */
 package main.java.com.beauty.domain;
 
+import org.apache.commons.lang.StringEscapeUtils;
+
 /**
  * @author vinay
  * 
@@ -13,6 +15,8 @@ public class PostPictureContent implements Comparable<PostPictureContent> {
 	private Posts posts;
 	private String postPicture;
 	private String postPictureDescription;
+	private String postPicVideoUrl;
+	private String postPicVideoDesc;
 
 	public PostPictureContent() {
 		super();
@@ -43,11 +47,27 @@ public class PostPictureContent implements Comparable<PostPictureContent> {
 	}
 
 	public String getPostPictureDescription() {
-		return postPictureDescription;
+		return StringEscapeUtils.unescapeHtml(postPictureDescription);
 	}
 
 	public void setPostPictureDescription(String postPictureDescription) {
 		this.postPictureDescription = postPictureDescription;
+	}
+
+	public String getPostPicVideoUrl() {
+		return postPicVideoUrl;
+	}
+
+	public void setPostPicVideoUrl(String postPicVideoUrl) {
+		this.postPicVideoUrl = postPicVideoUrl;
+	}
+
+	public String getPostPicVideoDesc() {
+		return StringEscapeUtils.unescapeHtml(postPicVideoDesc);
+	}
+
+	public void setPostPicVideoDesc(String postPicVideoDesc) {
+		this.postPicVideoDesc = postPicVideoDesc;
 	}
 
 	public int compareTo(PostPictureContent that) {

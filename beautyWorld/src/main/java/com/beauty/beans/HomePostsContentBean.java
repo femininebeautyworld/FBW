@@ -16,10 +16,12 @@ public class HomePostsContentBean {
 	private Date postPublishedDate;
 	private String postDescription;
 	private String postPictureUrl;
+	private String postPictureDescription;
 	private String postVidUrl;
 	private String postVideoDesc;
 	private int imageWidth;
 	private int imageHeight;
+	private int pageNumber;
 
 	public Long getPostId() {
 		return postId;
@@ -99,6 +101,22 @@ public class HomePostsContentBean {
 
 	public void setPostPublishedDate(Date postPublishedDate) {
 		this.postPublishedDate = postPublishedDate;
+	}
+
+	public int getPageNumber() {
+		return pageNumber;
+	}
+
+	public void setPageNumber(int pageNumber) {
+		this.pageNumber = pageNumber;
+	}
+
+	public String getPostPictureDescription() {
+		return postPictureDescription;
+	}
+
+	public void setPostPictureDescription(String postPictureDescription) {
+		this.postPictureDescription = postPictureDescription;
 	}
 
 }

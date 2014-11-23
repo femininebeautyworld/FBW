@@ -7,10 +7,12 @@ import java.math.BigDecimal;
 import java.sql.Clob;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
+import main.java.com.beauty.action.PostsComparator;
 import main.java.com.beauty.beans.HomePostsContentBean;
 import main.java.com.beauty.dao.PostActivityDAO;
 import main.java.com.beauty.domain.Posts;
@@ -68,7 +70,7 @@ public class PostActivityDAOImpl implements PostActivityDAO {
 			public Object doInHibernate(Session session)
 					throws HibernateException, SQLException {
 				Posts post = (Posts) session.get(Posts.class, postId);
-				 
+
 				return post;
 			}
 		};
@@ -76,22 +78,25 @@ public class PostActivityDAOImpl implements PostActivityDAO {
 	}
 
 	@Override
-	public List<HomePostsContentBean> getPostsByPostType(final String postType, final int rowNumStart, final int rowNumEnd) throws SQLException {
+	public List<HomePostsContentBean> getPostsByPostType(final String postType,
+			final int rowNumStart, final int rowNumEnd) throws SQLException {
 		HibernateCallback callback = new HibernateCallback() {
 			public Object doInHibernate(Session session)
 					throws HibernateException, SQLException {
 				Query query = session
 						.getNamedQuery("main.java.com.beauty.domain.getPostsByPostType");
-				query.setParameter("postType", postType, org.hibernate.Hibernate.STRING);
-				query.setParameter("rowNumStart", rowNumStart, org.hibernate.Hibernate.INTEGER);
-				query.setParameter("rowNumEnd", rowNumEnd, org.hibernate.Hibernate.INTEGER);
-				
+				query.setParameter("postType", postType,
+						org.hibernate.Hibernate.STRING);
+				query.setParameter("rowNumStart", rowNumStart,
+						org.hibernate.Hibernate.INTEGER);
+				query.setParameter("rowNumEnd", rowNumEnd,
+						org.hibernate.Hibernate.INTEGER);
+
 				int min = 1;
 				int max = 6;
-				int maxLength = 150;
-				
+
 				List<Object[]> posts = (List<Object[]>) query.list();
-				
+
 				List<HomePostsContentBean> assignedPosts = new ArrayList<HomePostsContentBean>();
 
 				for (Object[] obj : posts) {
@@ -102,18 +107,25 @@ public class PostActivityDAOImpl implements PostActivityDAO {
 					homePostsContentBean.setPostTitle((String) obj[1]);
 					homePostsContentBean.setPostType((String) obj[2]);
 					if (obj[3] != null) {
-						Clob clob = (Clob) (obj[3]);
-						homePostsContentBean.setPostDescription(clob.getSubString( 1, (int) clob.length()).replaceAll("\\<[^\\>]*\\>", ""));
+						Clob clob3 = (Clob) (obj[3]);
+						homePostsContentBean.setPostDescription(clob3
+								.getSubString(1, (int) clob3.length())
+								.replaceAll("\\<[^\\>]*\\>", ""));
 					}
 					homePostsContentBean.setPostPublishedDate((Date) obj[4]);
 					homePostsContentBean.setPostPictureUrl((String) obj[5]);
-					homePostsContentBean.setPostVidUrl((String) obj[6]);
-					if (obj[7] != null) {
-						if (obj[7].toString().length() > maxLength) {
-							homePostsContentBean.setPostVideoDesc(((String) obj[7]));
-						} else {
-							homePostsContentBean.setPostVideoDesc(((String) obj[7]));
-						}
+					if (obj[6] != null) {
+						Clob clob6 = (Clob) (obj[6]);
+						homePostsContentBean.setPostPictureDescription(clob6
+								.getSubString(1, (int) clob6.length())
+								.replaceAll("\\<[^\\>]*\\>", ""));
+					}
+					homePostsContentBean.setPostVidUrl((String) obj[7]);
+					if (obj[8] != null) {
+						Clob clob8 = (Clob) (obj[8]);
+						homePostsContentBean.setPostVideoDesc(clob8
+								.getSubString(1, (int) clob8.length())
+								.replaceAll("\\<[^\\>]*\\>", ""));
 					}
 
 					if (homePostsContentBean.getPostPictureUrl() != null) {
@@ -156,10 +168,11 @@ public class PostActivityDAOImpl implements PostActivityDAO {
 					assignedPosts.add(homePostsContentBean);
 
 				}
+				Collections.sort(assignedPosts, new PostsComparator());
 				return assignedPosts;
 			}
 		};
-		
+
 		return (List<HomePostsContentBean>) hibernateTemplate.execute(callback);
 	}
 
@@ -169,6 +182,18 @@ public class PostActivityDAOImpl implements PostActivityDAO {
 			public Object doInHibernate(Session session)
 					throws HibernateException, SQLException {
 				session.delete(post);
+				return null;
+			}
+		};
+		hibernateTemplate.execute(callback);
+	}
+
+	@Override
+	public void update(final Posts post) {
+		HibernateCallback callback = new HibernateCallback() {
+			public Object doInHibernate(Session session)
+					throws HibernateException, SQLException {
+				session.update(post);
 				return null;
 			}
 		};

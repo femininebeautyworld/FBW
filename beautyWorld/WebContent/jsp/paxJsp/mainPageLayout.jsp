@@ -25,15 +25,16 @@
 <link href="<%=RequestUtils.getBaseURI(request)%>/css/paxCss/slicknav.css" rel="stylesheet">
 <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+<script type="text/javascript" src="<%=RequestUtils.getBaseURI(request)%>/js/paxJs/jquery.grid-a-licious.js"></script>
 <script type="text/javascript" src="<%=RequestUtils.getBaseURI(request)%>/js/paxJs/jquery.infinitescroll.js"></script>
 <script type="text/javascript" src="<%=RequestUtils.getBaseURI(request)%>/js/paxJs/jquery.slicknav.js"></script>
-<script type="text/javascript" src="<%=RequestUtils.getBaseURI(request)%>/js/paxJs/retina-1.1.0.min.js"></script>
 <script type="text/javascript" src="<%=RequestUtils.getBaseURI(request)%>/js/paxJs/flickerplate.min.js"></script>
 <script type="text/javascript" src="<%=RequestUtils.getBaseURI(request)%>/js/paxJs/jquery.stalactite.min.js"></script>
 <script type="text/javascript" src="<%=RequestUtils.getBaseURI(request)%>/js/paxJs/jquery-finger-v0.1.0.min.js"></script>
 <script type="text/javascript" src="<%=RequestUtils.getBaseURI(request)%>/js/paxJs/modernizr-custom-v2.7.1.min.js"></script>
 <script type="text/javascript" src="<%=RequestUtils.getBaseURI(request)%>/js/paxJs/jquery.carouFredSel-6.2.1.js"></script>
 <script type="text/javascript" src="<%=RequestUtils.getBaseURI(request)%>/js/paxJs/scripts.js"></script>
+<script type="text/javascript" async defer  data-pin-color="red" data-pin-height="28" data-pin-hover="true" src="//assets.pinterest.com/js/pinit.js"></script>
 
 <!--css and js for multiple image display-->
 

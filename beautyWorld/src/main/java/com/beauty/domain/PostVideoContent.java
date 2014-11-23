@@ -3,6 +3,8 @@
  */
 package main.java.com.beauty.domain;
 
+import org.apache.commons.lang.StringEscapeUtils;
+
 /**
  * @author vinay
  * 
@@ -39,7 +41,7 @@ public class PostVideoContent implements Comparable<PostVideoContent> {
 	}
 
 	public String getPostVideoDescription() {
-		return postVideoDescription;
+		return StringEscapeUtils.unescapeHtml(postVideoDescription);
 	}
 
 	public void setPostVideoDescription(String postVideoDescription) {

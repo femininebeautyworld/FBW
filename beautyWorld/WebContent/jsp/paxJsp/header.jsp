@@ -43,7 +43,7 @@
 						<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-15" id="menu-item-15"><a
 							href="<%=RequestUtils.getBaseURI(request)%>/homePage.do?method=fetchResultsByPostType&postType=hair">Hair Styles</a></li>
 						<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-132" id="menu-item-132"><a href="#">Accessories <span class="slicknav_arrow">></span></a>
-							<ul class="sub-menu" style="display: block;">
+							<ul id="category" class="sub-menu" style="display: block;">
 								<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-16" id="menu-item-16"><a
 									href="<%=RequestUtils.getBaseURI(request)%>/homePage.do?method=fetchResultsByPostType&postType=jewelry">Jewelry</a></li>
 								<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-17" id="menu-item-17"><a
