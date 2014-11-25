@@ -357,16 +357,24 @@ function hideTextAreaDiv() {
 					<tr>
 						<td>Post Type:</td>
 						<td><html:select styleClass="register-input-highlight" property="postType" size="7">
-								<html:option value="" disabled="true">none</html:option>
-								<html:option value="fashion">Fashion</html:option>
-								<html:option value="beauty">Beauty</html:option>
-								<html:option value="health">Health</html:option>
-								<html:option value="hair">Hair Styles</html:option>
-								<html:option value="diy">Diys</html:option>
+								<html:option value="trend">Trend Fashion Wear</html:option>
 								<html:option value="celebrity">Celebrity Fashion</html:option>
+								<html:option value="beach">Beach Wear</html:option>
+								<html:option value="bridal">Bridal</html:option>
+								<html:option value="makeup">MakeUp</html:option>
+								<html:option value="reviews">Product Reviews</html:option>
+								<html:option value="hair">Hair</html:option>
+								<html:option value="nailart">Nail Art</html:option>
+								<html:option value="tatoos">Tattoos</html:option>
+								<html:option value="mehndi">Mehndi Designs</html:option>
+								<html:option value="diy">Diys</html:option>
+								<html:option value="health">Health</html:option>
 								<html:option value="jewelry">Jewelry</html:option>
 								<html:option value="bags">Hand Bags</html:option>
-								<html:option value="shoes">Shoes</html:option>
+								<html:option value="shoes">Foot Candy</html:option>
+								<html:option value="fragrances">Fragrances</html:option>
+								<html:option value="watches">Watches</html:option>
+								<html:option value="sunglasses">Sunglasses</html:option>
 								<html:option value="others">Others</html:option>
 							</html:select></td>
 					</tr>
