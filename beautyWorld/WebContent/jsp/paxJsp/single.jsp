@@ -107,7 +107,6 @@
 										<span style="color: #666666;"><c:out value="${post.postDescription}" escapeXml="false" /></span>
 									</p>
 									<div>
-									<iframe src="//www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fwww.facebook.com%2FFeminineBeautyWorld&amp;layout=button_count" scrolling="no" frameborder="0" style="border:none; overflow:hidden;" allowTransparency="true"></iframe>
 									</div>
 								</c:if>
 							</div>
@@ -123,18 +122,9 @@
 								</h1>
 								<c:forEach var="postVideoContent" items="${post.postVideoContents}" varStatus="loop">
 									<!--//video_inside_content-->
-
-									<table style="border-spacing: 35px;">
-										<tr align="left">
-											<td><p>
+                                                 <p>
 													<iframe frameborder="0" width="850" height="480" allowfullscreen="allowfullscreen" src="//${postVideoContent.postVideoUrl}"> </iframe>
 												</p>
-											<td>
-											<td align="right"><iframe
-													src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2FFeminineBeautyWorld&amp;width&amp;height=290&amp;colorscheme=light&amp;show_faces=true&amp;header=true&amp;stream=false&amp;show_border=true"
-													scrolling="no" frameborder="0" style="border: none; overflow: hidden; height: 290px;" allowTransparency="true"></iframe></td>
-										</tr>
-									</table>
 									<p style="color: #222222;">
 										<span style="color: #666666;"><c:out value="${post.postDescription}" escapeXml="false" /></span>
 									</p>
