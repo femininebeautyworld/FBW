@@ -1,12 +1,11 @@
 $(document).ready(function() {
-	$("#category li").hide();
-	
-    $('.header_menu li').hover(
+	$(".sub-menu").hide();
+	$('.header_menu li').hover(
         function () {
-        	$("#category li").show();
+            $('ul:first', this).css('display','block');
         }, 
         function () {
-        	$("#category li").hide();         
+            $('ul:first', this).css('display','none');         
         }
     );
 

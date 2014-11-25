@@ -5,8 +5,14 @@
 <%@ include file="/jsp/taglib.jspf"%>
 
 <script type="text/javascript">
+$(document).ready(function () {
+    $('#no_data').hide();
+});
+</script>
+<script type="text/javascript">
     var count = 3;
     var pgNumber = 1;
+    var alignment = 'left';
 	function ajaxRequest() {
 		var mygetrequest;
 		pgNumber = pgNumber + 1;
@@ -25,13 +31,15 @@
 						|| window.location.href.indexOf("http") == -1) {
 					var jsondata = eval("(" + mygetrequest.responseText + ")");//retrieve result as an JavaScript object
 					var rssentries = jsondata;
-					var output = '';
+					if( rssentries.toString().length > 0 )
+					{
+					var output = '<table><tr><td><div id="home_cont"> <div id="stalac_cont" class="gridalicious">';
 					var host = "<%=RequestUtils.getBaseURI(request)%>";
 					count = count + 1;
 					for (var i = 0; i < rssentries.length; i++) {
 						if( i % 4 == 0)
 						{
-						output += '<div class="galcolumn" id="item'+(count)+'hmd4K" style="width: 32.5865073437889%; padding-left: 30px; padding-bottom: 30px; float:left; box-sizing: border-box;">';
+						output += '<div class="galcolumn" id="item'+(count)+'hmd4K" style="width: 32.5865073437889%; padding-left: 30px; padding-bottom: 30px; float:'+alignment+'; box-sizing: border-box;">';
 						}
 						output += '<div class="item stalac_box" style="margin-bottom: 30px; opacity: 1;">';
 						if( rssentries[i].postPictureUrl != null )
@@ -58,13 +66,19 @@
 						count=count+1;
 					}
 					}
-					var para = document.createElement('div');
+					output += '</div></div></td></tr></table>';
+					
+					$( output ).insertBefore( $( ".homecont" ) );
+					}
+					else
+					{
+						document.getElementById('button').style.display = 'none';
+						document.getElementById('no_data').style.display = 'block';
+					}
+					/* var para = document.createElement('div');
 					para.innerHTML = output;
-					var element = document.getElementById("stalac_cont");
-					while(para.firstChild)
-						{
-						element.appendChild(para.firstChild);
-						}
+					var element = document.getElementById("home_cont");
+					element.prepend(para); */
 				} else {
 					alert("An error has occured making the request");
 				}
@@ -75,58 +89,76 @@
 	}
 </script>
 <c:set var="count" scope="application" value="1"/>
+<table>
+<tr>
+<td>
 <div id="home_cont">
 	<div id="stalac_cont" class="gridalicious">
-		<!-- //stalac_box -->
-		<c:forEach var="post" items="${posts}" varStatus="loop">
-			<c:if test="${loop.index % 4 eq 0}">
-				<div class="galcolumn" id="item${count}hmd4K" style="width: 32.5865073437889%; padding-left: 30px; padding-bottom: 30px; float: right; box-sizing: border-box;">
-			</c:if>
-			<div class="item stalac_box" style="margin-bottom: 30px; opacity: 1;">
-				<c:choose>
-					<c:when test="${post.postPictureUrl ne null}">
-						<span class="stalac_box_img"> <a href="<%=RequestUtils.getBaseURI(request)%>/viewPaxDetailPost.do?method=displayPost&postId=${post.postId}"><img width="${post.imageWidth}"
-								height="${post.imageHeight}" alt="img2" class="attachment-large wp-post-image" src="/beautyWorld/${post.postPictureUrl}"
-								style="width: 100%; height: auto; display: block; margin-left: auto; margin-right: auto;"></a>
-						</span>
-						<!-- //stalac_box_img -->
-						<h3>
-							<a href="<%=RequestUtils.getBaseURI(request)%>/viewPaxDetailPost.do?method=displayPost&postId=${post.postId}">${post.postTitle}</a>
-						</h3>
-						<c:if test="${post.postDescription ne null}">
-							<p class="item stalac_box"><c:out value="${fn:substring(post.postDescription, 0, 150)}"/>....</p>
-						</c:if>
-					</c:when>
-					<c:otherwise>
-						<span class="stalac_box_img"><iframe frameborder="0" width="340" height="200" allowfullscreen="" mozallowfullscreen="" webkitallowfullscreen="" src="//${post.postVidUrl}"></iframe>
-						</span>
-						<!-- //stalac_box_img -->
-						<h3>
-							<a href="<%=RequestUtils.getBaseURI(request)%>/viewPaxDetailPost.do?method=displayPost&postId=${post.postId}">${post.postTitle}</a>
-						</h3>
-						<c:if test="${post.postVideoDesc ne null}">
-							<p class="item stalac_box"><c:out value="${fn:substring(post.postVideoDesc, 0, 150)}"/>....</p>
-						</c:if>
-					</c:otherwise>
-				</c:choose>
-			</div>
-			<c:if test="${(loop.index ne 0 && (loop.index+1) % 4 eq 0 ) || (loop.index+1) eq fn:length(posts) }">
+			<!-- //stalac_box -->
+			<c:forEach var="post" items="${posts}" varStatus="loop">
+				<c:if test="${loop.index % 4 eq 0}">
+					<div class="galcolumn" id="item${count}hmd4K" style="width: 32.5865073437889%; padding-left: 30px; padding-bottom: 30px; float: left; box-sizing: border-box;">
+				</c:if>
+				<div class="item stalac_box" style="margin-bottom: 30px; opacity: 1;">
+					<c:choose>
+						<c:when test="${post.postPictureUrl ne null}">
+							<span class="stalac_box_img"> <a href="<%=RequestUtils.getBaseURI(request)%>/viewPaxDetailPost.do?method=displayPost&postId=${post.postId}"><img width="${post.imageWidth}"
+									height="${post.imageHeight}" alt="img2" class="attachment-large wp-post-image" src="/beautyWorld/${post.postPictureUrl}" data-original="/beautyWorld/${post.postPictureUrl}"
+									style="width: 100%; height: auto; display: block; margin-left: auto; margin-right: auto;"></a>
+							</span>
+							<!-- //stalac_box_img -->
+							<h3>
+								<a href="<%=RequestUtils.getBaseURI(request)%>/viewPaxDetailPost.do?method=displayPost&postId=${post.postId}">${post.postTitle}</a>
+							</h3>
+							<c:if test="${post.postDescription ne null}">
+								<p class="item stalac_box">
+									<c:out value="${fn:substring(post.postDescription, 0, 150)}" />
+									....
+								</p>
+							</c:if>
+						</c:when>
+						<c:otherwise>
+							<span class="stalac_box_img"><iframe frameborder="0" width="340" height="200" allowfullscreen="" mozallowfullscreen="" webkitallowfullscreen="" src="//${post.postVidUrl}"></iframe> </span>
+							<!-- //stalac_box_img -->
+							<h3>
+								<a href="<%=RequestUtils.getBaseURI(request)%>/viewPaxDetailPost.do?method=displayPost&postId=${post.postId}">${post.postTitle}</a>
+							</h3>
+							<c:if test="${post.postVideoDesc ne null}">
+								<p class="item stalac_box">
+									<c:out value="${fn:substring(post.postVideoDesc, 0, 150)}" />
+									....
+								</p>
+							</c:if>
+						</c:otherwise>
+					</c:choose>
+				</div>
+				<c:if test="${(loop.index ne 0 && (loop.index+1) % 4 eq 0 ) || (loop.index+1) eq fn:length(posts) }">
+		</div>
+		<c:set var="count" scope="application" value="${count+1}" />
+		</c:if>
+		</c:forEach>
+
 	</div>
-	 <c:set var="count" scope="application" value="${count+1}"/>
-	</c:if>
-	</c:forEach>
-	
-</div>
 <!--//stalac_cont-->
 </div>
-
-<div id="home_cont" align="center"> 
+</td>
+</tr>
+</table>
+<div id="home_cont" class="homecont" align="center"> 
 <div style="clear: both; height: 0px; width: 0px; display: block;" id="clearhmd4K"></div>
+<div id="no_data">No more world to view</div>
+<c:choose>
+<c:when test="${fn:length(posts) gt 0}">
 <button id="button" style="width: 150px; height: 30px" type="button" onclick="ajaxRequest()">View More</button>
+</c:when>
+<c:otherwise>
+<div id="first_no_data">No more world to view</div>
+</c:otherwise>
+</c:choose>
 <br>
 <br>
 <br>
 <br>
 <br>
 </div>
-<!--//home_cont-->
+<!-- //home_cont -->

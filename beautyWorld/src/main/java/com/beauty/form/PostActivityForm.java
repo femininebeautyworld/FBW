@@ -221,7 +221,7 @@ public class PostActivityForm extends ActionForm {
 			if (picContent.getPostPictureDescription() != null
 					|| !picContent.getPostPictureDescription().isEmpty()) {
 				postPictureContent.setPostPictureDescription(picContent
-						.getPostPictureDescription().replaceAll("\\<.*?>", ""));
+						.getPostPictureDescription());
 			}
 			postPictureContent.setPostPicVideoUrl(picContent.getPostPicVideoUrl());
 			postPictureContent.setPostPicVideoDesc(picContent.getPostPicVideoDesc());
@@ -240,8 +240,7 @@ public class PostActivityForm extends ActionForm {
 				postVideoContent.setPostVideoUrl(vidContent.getPostVideoUrl());
 				if (vidContent.getPostVideoDescription() != null) {
 					postVideoContent.setPostVideoDescription(vidContent
-							.getPostVideoDescription()
-							.replaceAll("\\<.*?>", ""));
+							.getPostVideoDescription());
 				}
 				postVideoContent.setPosts(post);
 				videoContentsSet.add(postVideoContent);
@@ -286,7 +285,7 @@ public class PostActivityForm extends ActionForm {
 		this.postTitle = post.getPostTitle();
 		this.postType = post.getPostType();
 		this.postViewType = post.getPostViewType();
-		this.datePublished = new SimpleDateFormat("MM/dd/yyyy", Locale.US)
+		this.datePublished = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss", Locale.US)
 				.format(post.getDatePublished());
 		this.postDescription = post.getPostDescription();
 	}

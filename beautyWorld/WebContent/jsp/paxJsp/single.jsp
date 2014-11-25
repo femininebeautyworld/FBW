@@ -10,6 +10,16 @@
 
 			<!--<div class="single_left single_full">-->
 			<div style="position: relative;" class="single_left">
+				<div class="next_prev_cont next_prev_cont_top_right">
+					<div class="left">
+
+						<a rel="prev" href="<%=RequestUtils.getBaseURI(request)%>/viewPaxDetailPost.do?method=displayPost&postId=${post.postId-1}"></a>
+					</div>
+					<div class="right">
+						<a rel="next" href="<%=RequestUtils.getBaseURI(request)%>/viewPaxDetailPost.do?method=displayPost&postId=${post.postId+1}"></a>
+					</div>
+					<div class="clear"></div>
+				</div>
 				<div class="single_inside_content">
 					<c:choose>
 						<c:when test="${fn:length(post.postPictureContents) > 0 }">
@@ -56,7 +66,7 @@
 									</div>
 								</c:if>
 								<c:if test="${post.postViewType eq 'alternateHorizontal'}">
-									<div align="center">
+									<div align="left">
 										<h1 class="single_title">
 											<c:out value="${post.postTitle}" />
 										</h1>
@@ -81,10 +91,12 @@
 									</div>
 								</c:if>
 								<c:if test="${post.postViewType eq 'straight'}">
-									<div class="rslides_container">
-									<h1 class="single_title">
+								<div style="position: relative;" class="single_left">
+										<h1 class="single_title">
 									<c:out value="${post.postTitle}" />
 								    </h1>
+								</div>
+									<div class="rslides_container">
 										<ul class="rslides" id="slider1">
 											<c:forEach var="postPictureContent" items="${post.postPictureContents}" varStatus="loop">
 												<li><img width="600" height="800" src="${postPictureContent.postPicture}"></li>
@@ -94,6 +106,9 @@
 									<p style="color: #222222;">
 										<span style="color: #666666;"><c:out value="${post.postDescription}" escapeXml="false" /></span>
 									</p>
+									<div>
+									<iframe src="//www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fwww.facebook.com%2FFeminineBeautyWorld&amp;layout=button_count" scrolling="no" frameborder="0" style="border:none; overflow:hidden;" allowTransparency="true"></iframe>
+									</div>
 								</c:if>
 							</div>
 						</c:when>

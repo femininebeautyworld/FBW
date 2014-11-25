@@ -36,10 +36,6 @@
 <script type="text/javascript" src="<%=RequestUtils.getBaseURI(request)%>/js/paxJs/scripts.js"></script>
 <script type="text/javascript" async defer  data-pin-color="red" data-pin-height="28" data-pin-hover="true" src="//assets.pinterest.com/js/pinit.js"></script>
 
-<!--css and js for multiple image display-->
-
-
-
 <style type="text/css">
 body {
 	
@@ -47,7 +43,6 @@ body {
 </style>
 </head>
 <body class="home blog">
-
 	<tiles:insert attribute="header" />
 
 	<tiles:insert attribute="body" />
