@@ -1,4 +1,4 @@
-/*package main.java.com.beauty.util;
+package main.java.com.beauty.util;
 
 import java.sql.Timestamp;
 import java.text.DateFormat;
@@ -84,11 +84,11 @@ public class DateUtils
     return nextDay;
   }
 
-  *//**
+  /**
    * Returns the first of the current year (Jan 1, current year)
    * 
    * @return Date
-   *//*
+   */
   public static Date getFirstDayOfThisYear()
   {
     Calendar calendar = GregorianCalendar.getInstance();
@@ -98,12 +98,12 @@ public class DateUtils
     return calendar.getTime();
   }
 
-  *//**
+  /**
    * Returns the first of the prior month
    * 
    * @param date
    * @return Date
-   *//*
+   */
   public static Date getFirstDayOfPreviousMonth( Date date )
   {
     Calendar calendar = GregorianCalendar.getInstance();
@@ -116,22 +116,22 @@ public class DateUtils
     return toStartDate( calendar.getTime() );
   }
 
-  *//**
+  /**
    * Returns the first of the prior month
    * 
    * @return Date
-   *//*
+   */
   public static Date getFirstDayOfPreviousMonth()
   {
     return getFirstDayOfPreviousMonth( new Date() );
   }
 
-  *//**
+  /**
    * Returns the first of the month
    * 
    * @param date
    * @return Date
-   *//*
+   */
   public static Date getFirstDayOfMonth( Date date )
   {
     Calendar calendar = GregorianCalendar.getInstance();
@@ -140,22 +140,22 @@ public class DateUtils
     return toStartDate( calendar.getTime() );
   }
 
-  *//**
+  /**
    * Returns the first of the current month
    * 
    * @return Date
-   *//*
+   */
   public static Date getFirstDayOfCurrentMonth()
   {
     return getFirstDayOfMonth( new Date() );
   }
 
-  *//**
+  /**
    * Returns the last of the month
    * 
    * @param date
    * @return Date
-   *//*
+   */
   public static Date getLastDayOfMonth( Date date )
   {
     Calendar calendar = GregorianCalendar.getInstance();
@@ -164,20 +164,20 @@ public class DateUtils
     return toStartDate( calendar.getTime() );
   }
 
-  *//**
+  /**
    * Returns the last of the current month
    * 
    * @return Date
-   *//*
+   */
   public static Date getLastDayOfCurrentMonth()
   {
     return getLastDayOfMonth( new Date() );
   }
 
-  *//**
+  /**
    * Gives the month for the specific date
    * @return int month
-   *//*
+   */
   public static int getMonthFromDate( Date inputDate )
   {
     Calendar cal = Calendar.getInstance();
@@ -185,10 +185,10 @@ public class DateUtils
     return cal.get( Calendar.MONTH );
   }
 
-  *//**
+  /**
    * Gives the year for the specific date
    * @return int current year
-   *//*
+   */
   public static int getYearFromDate( Date inputDate )
   {
     Calendar cal = Calendar.getInstance();
@@ -196,13 +196,13 @@ public class DateUtils
     return cal.get( Calendar.YEAR );
   }
 
-  *//**
+  /**
    * Calculates the start date of the next rolling period
    * @param currentStartDate
    * @param timeframeType
    * @param rollingPeriodAmount
    * @return
-   *//*
+   */
   public static Date getRollingPeriodStartDate( int timeframeMonthId, int timeframeYear, String timeframeType, String timeframeNavigate )
   {
     Date rollingPeriodStartDate = null;
@@ -270,13 +270,13 @@ public class DateUtils
     return rollingPeriodStartDate;
   }
 
-  *//**
+  /**
    * Calculates the end date of the next rolling period
    * @param currentEndDate
    * @param timeframeType
    * @param rollingPeriodAmount
    * @return
-   *//*
+   */
   public static Date getRollingPeriodEndDate( int timeframeMonthId, int timeframeYear, String timeframeType, String timeframeNavigate )
   {
     Date rollingPeriodEndDate = null;
@@ -321,12 +321,12 @@ public class DateUtils
     return rollingPeriodEndDate;
   }
 
-  *//**
+  /**
    * Returns the full name of the previous month
    * 
    * @param date
    * @return String
-   *//*
+   */
   public static String getPreviousMonthAsString( Date date )
   {
     Calendar calendar = GregorianCalendar.getInstance();
@@ -350,12 +350,12 @@ public class DateUtils
     return toEndDate( calendar.getTime() );
   }
 
-  *//**
+  /**
    * Returns the year as string of the previous month
    * 
    * @param date
    * @return String
-   *//*
+   */
   public static String getYearOfPreviousMonthAsString( Date date )
   {
     Calendar calendar = GregorianCalendar.getInstance();
@@ -368,12 +368,12 @@ public class DateUtils
     return sdf.format( calendar.getTime() );
   }
 
-  *//**
+  /**
    * Returns the last day of the prior month
    * 
    * @param date
    * @return Date
-   *//*
+   */
   public static Date getLastDayOfPreviousMonth( Date date )
   {
     Calendar calendar = GregorianCalendar.getInstance();
@@ -386,11 +386,11 @@ public class DateUtils
     return toEndDate( calendar.getTime() );
   }
 
-  *//**
+  /**
    * Returns the last day of the prior month
    * 
    * @return Date
-   *//*
+   */
   public static Date getLastDayOfPreviousMonth()
   {
     return getLastDayOfPreviousMonth( new Date() );
@@ -411,7 +411,7 @@ public class DateUtils
 
   public static Date toDate( String dateString )
   {
-    return toDate( dateString, UserManager.getLocale() );
+    return toDate( dateString, Locale.US );
   }
 
   public static Date toDate( String dateString, Locale locale )
@@ -441,7 +441,7 @@ public class DateUtils
     {
       return null;
     }
-    SimpleDateFormat sdf = new SimpleDateFormat( UserManager.getUserDatePattern() );
+    SimpleDateFormat sdf = new SimpleDateFormat( "MM-dd-yyyy" );
     Date date = null;
     try
     {
@@ -450,7 +450,7 @@ public class DateUtils
     }
     catch( ParseException e )
     {
-      log.warn( "String to java.util.Date parsing exception, string to convert: '" + dateString + "', with pattern: '" + UserManager.getUserDatePattern() + "'" );
+      log.warn( "String to java.util.Date parsing exception, string to convert: '" + dateString + "', with pattern: '" + "MM-dd-yyyy" + "'" );
     }
     return date;
   }
@@ -472,7 +472,7 @@ public class DateUtils
 
   public static String toDisplayString( Date date )
   {
-    return toDisplayString( date, UserManager.getLocale() );
+    return toDisplayString( date, Locale.US );
   }
 
   public static String toDisplayString( Date date, Locale locale )
@@ -489,7 +489,7 @@ public class DateUtils
     if ( date == null )
       return "";
 
-    SimpleDateFormat sdf = new SimpleDateFormat( DateFormatterUtil.getDateTimeSecPattern( UserManager.getLocale() ) );
+    SimpleDateFormat sdf = new SimpleDateFormat( DateFormatterUtil.getDateTimeSecPattern( Locale.US ) );
     return sdf.format( date );
   }
 
@@ -498,7 +498,7 @@ public class DateUtils
     if ( date == null )
       return "";
 
-    SimpleDateFormat sdf = new SimpleDateFormat( DateFormatterUtil.getDateTimeSecTZPattern( UserManager.getLocale() ) );
+    SimpleDateFormat sdf = new SimpleDateFormat( DateFormatterUtil.getDateTimeSecTZPattern( Locale.US ) );
     return sdf.format( date );
   }
 
@@ -507,7 +507,7 @@ public class DateUtils
     if ( date == null )
       return "";
 
-    SimpleDateFormat sdf = new SimpleDateFormat( DateFormatterUtil.getDateTimeMerTZPattern( UserManager.getLocale() ) );
+    SimpleDateFormat sdf = new SimpleDateFormat( DateFormatterUtil.getDateTimeMerTZPattern( Locale.US ) );
     return sdf.format( date );
   }
 
@@ -516,11 +516,11 @@ public class DateUtils
     if ( date == null )
       return "";
 
-    SimpleDateFormat sdf = new SimpleDateFormat( DateFormatterUtil.getDateTimeMerPattern( UserManager.getLocale() ) );
+    SimpleDateFormat sdf = new SimpleDateFormat( DateFormatterUtil.getDateTimeMerPattern( Locale.US ) );
     return sdf.format( date );
   }
 
-  *//**
+  /**
    * Converts a <code>String</code> object that represents a date and time to a <code>Date</code>
    * object that represents the same date and time.
    * 
@@ -528,31 +528,31 @@ public class DateUtils
    * @return a <code>Date</code> object that represents the same date and time as the parameter
    *         <code>dateString</code>.
    * @throws ParseException if <code>dateString</code> does not represent a valid date.
-   *//*
+   */
   public static Date toDateChecked( String dateString ) throws ParseException
   {
-    DateFormat dateFormat = new SimpleDateFormat( DateFormatterUtil.getDatePattern( UserManager.getLocale() ) );
+    DateFormat dateFormat = new SimpleDateFormat( DateFormatterUtil.getDatePattern( Locale.US ) );
     return dateFormat.parse( dateString );
   }
 
-  *//**
+  /**
    * Returns a <code>Date</code> object that represents the earliest time on the specified date.
    * 
    * @param dateString
    * @return a <code>Date</code> object that represents the earliest time on the specified date.
    * @throws ParseException if <code>dateString</code> does not represent a valid date.
-   *//*
+   */
   public static Date toStartDate( String dateString ) throws ParseException
   {
     return toStartDate( toDateChecked( dateString ) );
   }
 
-  *//**
+  /**
    * Returns a <code>Date</code> object that represents the earliest time on the specified date.
    * 
    * @param date
    * @return a <code>Date</code> object that represents the earliest time on the specified date.
-   *//*
+   */
   public static Date toStartDate( Date date )
   {
     if ( date == null )
@@ -570,24 +570,24 @@ public class DateUtils
     return calendar.getTime();
   }
 
-  *//**
+  /**
    * Returns a <code>Date</code> object that represents the latest time on the specified date.
    * 
    * @param dateString
    * @return a <code>Date</code> object that represents the latest time on the specified date.
    * @throws ParseException if <code>dateString</code> does not represent a valid date.
-   *//*
+   */
   public static Date toEndDate( String dateString ) throws ParseException
   {
     return toEndDate( toDateChecked( dateString ) );
   }
 
-  *//**
+  /**
    * Returns a <code>Date</code> object that represents the latest time on the specified date.
    * 
    * @param date
    * @return a <code>Date</code> object that represents the latest time on the specified date.
-   *//*
+   */
   public static Date toEndDate( Date date )
   {
     if ( date == null )
@@ -605,7 +605,7 @@ public class DateUtils
     return calendar.getTime();
   }
 
-  *//**
+  /**
    * Checks if today's date is between the given start and end date. Note: it does not look at time -
    * it clears that portion out. If no date is given for either start or end date, it will use
    * today's date.
@@ -613,13 +613,13 @@ public class DateUtils
    * @param startDate
    * @param endDate
    * @return boolean true if today's date is between the given start and end date
-   *//*
+   */
   public static boolean isTodaysDateBetween( Date startDate, Date endDate )
   {
     return isDateBetween( new Date(), startDate, endDate );
   }
 
-  *//**
+  /**
    * Checks if reference date is between the given start and end date. Note: it does not look at time -
    * it clears that portion out. If no date is given for either start or end date, it will use
    * reference date.
@@ -627,7 +627,7 @@ public class DateUtils
    * @param startDate
    * @param endDate
    * @return boolean true if reference date is between the given start and end date
-   *//*
+   */
   public static boolean isDateBetween( Date referenceDate, Date startDate, Date endDate )
   {
     // FALSE, if Reference date is NULL
@@ -695,7 +695,7 @@ public class DateUtils
     return cal.getTime();
   }
 
-  *//**
+  /**
    * Converts a <code>String</code> object that represents a date and time to a <code>Date</code>
    * object that represents the same date and time.
    * 
@@ -703,18 +703,18 @@ public class DateUtils
    * @return a <code>Date</code> object that represents the same date and time as the parameter
    *         <code>dateString</code>.
    * @throws ParseException if <code>dateString</code> does not represent a valid date.
-   *//*
+   */
   public static Date toDateWithTime( String dateString ) throws ParseException
   {
-    DateFormat dateFormat = new SimpleDateFormat( DateFormatterUtil.getDateTimePattern( UserManager.getLocale() ) );
+    DateFormat dateFormat = new SimpleDateFormat( DateFormatterUtil.getDateTimePattern( Locale.US ) );
     return dateFormat.parse( dateString );
   }
 
-  *//**
+  /**
    * @param date1
    * @param date2
    * @return the number of days between 2 dates. e.g. 12/30/01 and 2/1/02 returns 33
-   *//*
+   */
   public static int getElapsedDays( Date date1, Date date2 )
   {
     GregorianCalendar g1 = new GregorianCalendar();
@@ -755,7 +755,7 @@ public class DateUtils
     return elapsed;
   }
 
-  *//**
+  /**
 
    * Rounds a <code>Date</code> object to the nearest midnight.
 
@@ -763,7 +763,7 @@ public class DateUtils
 
    * @return a <code>Date</code> object representing the nearest midnight.
 
-   *//*
+   */
 
   public static Date round( Date date )
 
@@ -790,7 +790,7 @@ public class DateUtils
 
   }
 
-  *//**
+  /**
    * Convert inputDate into social friendly time laps String
    * Today               Just now (for 0-9 seconds)
    *                     About 50 seconds ago
@@ -808,7 +808,7 @@ public class DateUtils
    * 
    * @param inputDate
    * @return String
-   *//*
+   */
   public static String toRelativeTimeLapsed( Date inputDate )
   {
     final String NOW = "Just Now";// "Just now";
@@ -868,7 +868,7 @@ public class DateUtils
     }
   }
 
-  *//**
+  /**
    * <table border="1">
    * <caption>Method functionality</caption>
    * <tr><td>Input java.sql.Timestamp:</td><td>2012-12-15 12:02:29.329</td></tr>
@@ -876,7 +876,7 @@ public class DateUtils
    * </table>
    * @param  java.sql.Timestamp
    * @return java.util.Date
-   *//*
+   */
   public static Date getDateFromTimeStamp( Timestamp timestamp )
   {
     if ( timestamp != null )
@@ -885,7 +885,7 @@ public class DateUtils
       return new Date();
   }
 
-  *//**
+  /**
    * <table border="1">
    * <caption>Method functionality</caption>
    * <tr><td>Input java.sql.Timestamp:</td><td>2012-12-15 12:02:29.329</td></tr>
@@ -893,7 +893,7 @@ public class DateUtils
    * </table>
    * @param  java.sql.Timestamp
    * @return String
-   *//*
+   */
   public static String getStringFromTimeStamp( Timestamp timestamp )
   {
     Date date = new Date();
@@ -902,10 +902,10 @@ public class DateUtils
     return toDisplayString( date );
   }
 
-  *//**
+  /**
    * @param timestamp
    * @return String representing a date for sorting purposes <year><month><dayofmonth>
-   *//*
+   */
   public static String getSortDateString( Timestamp timestamp )
   {
     Date date = new Date();
@@ -919,7 +919,7 @@ public class DateUtils
     return String.format( "%1$tY%1$tm%1$td", date );
   }
 
-  *//**
+  /**
    * <table border="1">
    * <caption>Method functionality</caption>
    * <tr><td>Input Date and Locale</td><td>java Date and Locale.US</td></tr>
@@ -928,7 +928,7 @@ public class DateUtils
    * @param  java.util.Date
    * @param  java.util.Locale
    * @return String
-   *//*
+   */
   public static String getDateTimeStringIn12HourPattern( Date date, Locale locale )
   {
     if ( date == null )
@@ -991,4 +991,3 @@ public class DateUtils
   }
 
 }
-*/

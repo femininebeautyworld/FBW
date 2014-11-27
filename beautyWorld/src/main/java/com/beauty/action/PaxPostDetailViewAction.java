@@ -6,6 +6,7 @@ package main.java.com.beauty.action;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import main.java.com.beauty.beans.PostPreviousNextValueBean;
 import main.java.com.beauty.domain.Posts;
 import main.java.com.beauty.service.PostActivityService;
 
@@ -22,8 +23,6 @@ public class PaxPostDetailViewAction extends DispatchAction {
 
 	private final String SUCCESS_POST = "success_post";
 	private final String FAILURE = "failure";
-	private final String SUCCESS_HORIZON_VIEW = "success_horizon_view";
-	private final String HORIZON_VIEW = "alternateHorizontal";
 
 	private PostActivityService postActivityService;
 
@@ -37,18 +36,16 @@ public class PaxPostDetailViewAction extends DispatchAction {
 
 		Long postId = Long.parseLong(request.getParameter("postId"));
 		Posts post = new Posts();
+		PostPreviousNextValueBean postPreviousNextValueBean = new PostPreviousNextValueBean();
 		try {
 			post = postActivityService.getPostById(postId);
+			postPreviousNextValueBean = postActivityService.getPostPreviousNextValues( postId );
 		} catch (Exception e) {
 			return mapping.findForward(FAILURE);
 		}
 		request.setAttribute("post", post);
+		request.setAttribute("postPreviousNextValueBean", postPreviousNextValueBean);
         response.setContentType("text/html");
-		
-/*		if( post.getPostViewType().equals(HORIZON_VIEW) )
-		{
-		  return mapping.findForward(SUCCESS_HORIZON_VIEW);
-		}*/
 
 		return mapping.findForward(SUCCESS_POST);
 	}

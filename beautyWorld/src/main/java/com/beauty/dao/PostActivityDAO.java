@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import main.java.com.beauty.beans.HomePostsContentBean;
+import main.java.com.beauty.beans.PostPreviousNextValueBean;
 import main.java.com.beauty.domain.Posts;
 
 /**
@@ -26,5 +27,7 @@ public interface PostActivityDAO {
 	void deletePost(Posts post);
 
 	void update(Posts post);
+
+	PostPreviousNextValueBean getPostPreviousNextValues(Long postId);
 
 }

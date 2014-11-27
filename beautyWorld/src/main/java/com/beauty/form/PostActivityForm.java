@@ -18,6 +18,7 @@ import main.java.com.beauty.beans.PictureContentBean;
 import main.java.com.beauty.domain.PostPictureContent;
 import main.java.com.beauty.domain.PostVideoContent;
 import main.java.com.beauty.domain.Posts;
+import main.java.com.beauty.util.DateUtils;
 
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
@@ -42,6 +43,8 @@ public class PostActivityForm extends ActionForm {
 	private String postDescription;
 	private String dateCreated;
 	private String datePublished;
+	private String postHours;
+	private String postMinutes;
 	private String method;
 	private List<PictureContentBean> pictureContents;
 	private List<PostVideoContent> videoContents;
@@ -203,7 +206,11 @@ public class PostActivityForm extends ActionForm {
 		post.setPostViewType(this.postViewType);
 		post.setPostDescription(this.postDescription);
 		post.setDateCreated(date);
-		post.setDatePublished(new SimpleDateFormat("MM/dd/yyyy").parse(this.datePublished));
+		Date publishedDate = new Date(this.datePublished);
+		publishedDate.setHours(Integer.parseInt(postHours));
+		publishedDate.setMinutes(Integer.parseInt(postMinutes));
+		
+		post.setDatePublished( publishedDate );
 		if (post.getPostId() == null) {
 			post.setPostPictureContents(toPictureContentDomainObject(post));
 			post.setPostVideoContents(toVideoContentDomainObject(post));
@@ -285,6 +292,8 @@ public class PostActivityForm extends ActionForm {
 		this.postTitle = post.getPostTitle();
 		this.postType = post.getPostType();
 		this.postViewType = post.getPostViewType();
+		this.postHours = String.valueOf(post.getDatePublished().getHours());
+		this.postMinutes = String.valueOf(post.getDatePublished().getMinutes());
 		this.datePublished = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss", Locale.US)
 				.format(post.getDatePublished());
 		this.postDescription = post.getPostDescription();
@@ -348,6 +357,22 @@ public class PostActivityForm extends ActionForm {
 
 	public void setPostId(Long postId) {
 		this.postId = postId;
+	}
+
+	public String getPostHours() {
+		return postHours;
+	}
+
+	public void setPostHours(String postHours) {
+		this.postHours = postHours;
+	}
+
+	public String getPostMinutes() {
+		return postMinutes;
+	}
+
+	public void setPostMinutes(String postMinutes) {
+		this.postMinutes = postMinutes;
 	}
 
 }

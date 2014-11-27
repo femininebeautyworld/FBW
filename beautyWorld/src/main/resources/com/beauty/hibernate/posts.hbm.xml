@@ -46,6 +46,25 @@
 		<return alias="post" class="main.java.com.beauty.domain.Posts" />
         <![CDATA[select * from fbm_posts post where post_id = :postId]]>
 	</sql-query>
+	
+	<sql-query name="main.java.com.beauty.domain.getPostPreviousNextValues">
+        <![CDATA[
+        SELECT *
+     FROM
+  (SELECT POST_ID AS nextPost
+  FROM fbm_posts
+  WHERE post_id =
+    (SELECT MIN(post_id) FROM fbm_posts WHERE post_id > :postId
+    )
+  ) next_post,
+  (SELECT POST_ID AS prevPost
+  FROM fbm_posts
+  WHERE post_id =
+    (SELECT MAX(post_id) FROM fbm_posts WHERE post_id < :postId
+    )
+  ) prev_post
+  ]]>
+	</sql-query>
 
 	<sql-query name="main.java.com.beauty.domain.getPostsByPostType">
         <![CDATA[ 

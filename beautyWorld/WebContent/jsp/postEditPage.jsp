@@ -380,8 +380,12 @@ function hideTextAreaDiv() {
 							</html:select></td>
 					</tr>
 					<tr>
-					<td>Date:</td> 
+					<td>Post Publish Date:</td> 
 					<td><html:text styleId="datepicker" styleClass="register-input-highlight" property="datePublished" maxlength="100" size="20" /></td>
+					</tr>
+					<tr>
+					<td>Post Publish Time:</td> 
+					<td>HH:<html:text property="postHours" maxlength="2" size="2" /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MM:<html:text property="postMinutes" maxlength="2" size="2" /></td>
 					</tr>
 					<tr>
 						<td>Post Description:</td>

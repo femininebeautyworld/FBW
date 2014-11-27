@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.TreeSet;
 
 import main.java.com.beauty.beans.HomePostsContentBean;
+import main.java.com.beauty.beans.PostPreviousNextValueBean;
 import main.java.com.beauty.dao.PostActivityDAO;
 import main.java.com.beauty.domain.Posts;
 import main.java.com.beauty.service.PostActivityService;
@@ -57,6 +58,11 @@ public class PostActivityServiceImpl implements PostActivityService {
 	@Override
 	public void update(Posts post) {
 		postActivityDAO.update(post);
+	}
+
+	@Override
+	public PostPreviousNextValueBean getPostPreviousNextValues(Long postId) {
+		return postActivityDAO.getPostPreviousNextValues( postId );
 	}
 
 }

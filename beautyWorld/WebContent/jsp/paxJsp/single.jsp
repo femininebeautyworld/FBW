@@ -13,10 +13,10 @@
 				<div class="next_prev_cont next_prev_cont_top_right">
 					<div class="left">
 
-						<a rel="prev" href="<%=RequestUtils.getBaseURI(request)%>/viewPaxDetailPost.do?method=displayPost&postId=${post.postId-1}"></a>
+						<a rel="prev" href="<%=RequestUtils.getBaseURI(request)%>/viewPaxDetailPost.do?method=displayPost&postId=${postPreviousNextValueBean.prevPost}"></a>
 					</div>
 					<div class="right">
-						<a rel="next" href="<%=RequestUtils.getBaseURI(request)%>/viewPaxDetailPost.do?method=displayPost&postId=${post.postId+1}"></a>
+						<a rel="next" href="<%=RequestUtils.getBaseURI(request)%>/viewPaxDetailPost.do?method=displayPost&postId=${postPreviousNextValueBean.nextPost}"></a>
 					</div>
 					<div class="clear"></div>
 				</div>

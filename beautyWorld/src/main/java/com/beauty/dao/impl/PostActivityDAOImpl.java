@@ -7,13 +7,12 @@ import java.math.BigDecimal;
 import java.sql.Clob;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
-import main.java.com.beauty.action.PostsComparator;
 import main.java.com.beauty.beans.HomePostsContentBean;
+import main.java.com.beauty.beans.PostPreviousNextValueBean;
 import main.java.com.beauty.dao.PostActivityDAO;
 import main.java.com.beauty.domain.Posts;
 
@@ -168,7 +167,6 @@ public class PostActivityDAOImpl implements PostActivityDAO {
 					assignedPosts.add(homePostsContentBean);
 
 				}
-				Collections.sort(assignedPosts, new PostsComparator());
 				return assignedPosts;
 			}
 		};
@@ -198,6 +196,36 @@ public class PostActivityDAOImpl implements PostActivityDAO {
 			}
 		};
 		hibernateTemplate.execute(callback);
+	}
+
+	@Override
+	public PostPreviousNextValueBean getPostPreviousNextValues(final Long postId) {
+		HibernateCallback callback = new HibernateCallback() {
+			public Object doInHibernate(Session session)
+					throws HibernateException, SQLException {
+				
+				Query query = session
+						.getNamedQuery("main.java.com.beauty.domain.getPostPreviousNextValues");
+				query.setParameter("postId", postId);
+				Object[] obj = (Object[]) query.uniqueResult();
+				
+				PostPreviousNextValueBean postPreviousNextValueBean = new PostPreviousNextValueBean();
+
+				if (obj != null) {
+					if (obj[0] != null) {
+						BigDecimal bg1 = (BigDecimal) obj[0];
+						postPreviousNextValueBean.setNextPost(bg1.longValue());
+					}
+					if (obj[1] != null) {
+						BigDecimal bg2 = (BigDecimal) obj[1];
+						postPreviousNextValueBean.setPrevPost(bg2.longValue());
+					}
+				}
+
+				return postPreviousNextValueBean;
+			}
+		};
+		return (PostPreviousNextValueBean) hibernateTemplate.execute(callback);
 	}
 
 }

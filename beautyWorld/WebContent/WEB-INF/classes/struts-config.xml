@@ -109,7 +109,7 @@
 			scope="request">
 			<forward name="success_post" path="pax.post.view.page" />
 			<forward name="success_horizon_view" path="pax.horizon.post.view.page" />
-			<forward name="failure" redirect="true" path="/homePage.do" />
+			<forward name="failure" redirect="true" path="/homePage.do?method=fetchResultsByPostType" />
 		</action>
 			
 	    <action path="/contactUs"
